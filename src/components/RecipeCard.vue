@@ -3,7 +3,8 @@
     <md-card>
       <md-card-media>
         <img
-          :src="this.image"
+          
+          src="this.image"
           alt="People"
         />
       </md-card-media>
