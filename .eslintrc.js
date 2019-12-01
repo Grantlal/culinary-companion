@@ -2,6 +2,10 @@
 
 module.exports = {
     root: true,
+    plugins: [
+        "html",
+        "flowtype"
+      ],
     parser: 'babel-eslint',
     'rules': {
       // allow paren-less arrow functions
