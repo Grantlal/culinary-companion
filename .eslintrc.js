@@ -3,22 +3,6 @@
 module.exports = {
     root: true,
     parser: 'babel-eslint',
-    parserOptions: {
-      sourceType: 'module'
-    },
-    env: {
-      browser: true,
-    },
-    // https://github.com/standard/standard/blob/master/docs/RULES-en.md
-    extends: [
-      "plugin:flowtype/recommended"
-    ],
-    // required to lint *.vue files
-    plugins: [
-      "html",
-      "flowtype"
-    ],
-    // add your custom rules here
     'rules': {
       // allow paren-less arrow functions
       'arrow-parens': 0,
