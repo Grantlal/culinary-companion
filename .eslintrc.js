@@ -7,6 +7,9 @@ module.exports = {
         "flowtype"
       ],
     parser: 'babel-eslint',
+    parserOptions: {
+      "sourceType": "module"
+    },
     'rules': {
       // allow paren-less arrow functions
       'arrow-parens': 0,
