@@ -1,46 +1,67 @@
 {
-  "name": "culinarycompanion",
-  "version": "0.1.0",
-  "private": true,
-  "scripts": {
-    "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint",
-    "start": "node server.js"
-  },
-  "dependencies": {
-    "core-js": "^3.4.3",
-    "express": "^4.17.1",
-    "material": "^0.4.3",
-    "serve-static": "^1.14.1",
-    "vue": "^2.6.10",
-    "vue-material": "^1.0.0-beta-11"
-  },
-  "devDependencies": {
-    "@vue/cli-plugin-babel": "^4.1.0",
-    "@vue/cli-plugin-eslint": "^4.1.0",
-    "@vue/cli-service": "^4.1.0",
-    "babel-eslint": "^10.0.3",
-    "eslint": "^5.16.0",
-    "eslint-plugin-vue": "^5.0.0",
-    "vue-template-compiler": "^2.6.10"
-  },
-  "eslintConfig": {
-    "root": true,
-    "env": {
-      "node": true
-    },
-    "extends": [
-      "plugin:vue/essential",
-      "eslint:recommended"
-    ],
-    "rules": {},
-    "parserOptions": {
-      "parser": "babel-eslint"
-    }
-  },
-  "browserslist": [
-    "> 1%",
-    "last 2 versions"
-  ]
+	"name": "springboot_vue_page",
+	"version": "1.0.0",
+	"description": "",
+	"dependencies": {
+		"babel-eslint": "^7.2.3",
+		"babel-plugin-transform-runtime": "^6.23.0",
+		"babel-preset-env": "^1.7.0",
+		"babel-preset-stage-2": "^6.24.1",
+		"copy-webpack-plugin": "^4.6.0",
+		"eslint": "^3.19.0",
+		"eslint-config-standard": "^6.2.1",
+		"eslint-friendly-formatter": "^3.0.0",
+		"eslint-loader": "^1.9.0",
+		"eslint-plugin-flowtype": "^2.50.3",
+		"eslint-plugin-html": "^3.2.2",
+		"eslint-plugin-promise": "^3.8.0",
+		"eslint-plugin-standard": "^2.3.1",
+		"eventsource-polyfill": "^0.9.6",
+		"friendly-errors-webpack-plugin": "^1.7.0",
+		"node-fetch": "^2.6.0",
+		"optimize-css-assets-webpack-plugin": "^2.0.0",
+		"ora": "^1.4.0",
+		"uribuilder": "^1.0.5",
+		"vue-material": "^1.0.0-beta-11",
+		"vue-material-checkbox": "^2.2.0",
+		"webpack-hot-middleware": "^2.25.0"
+	},
+	"devDependencies": {
+		"apidoc": "^0.17.7",
+		"autoprefixer": "^7.2.6",
+		"axios": "^0.19.0",
+		"babel-core": "^6.26.3",
+		"babel-loader": "^6.4.1",
+		"css-loader": "^0.28.11",
+		"cssnano": "^3.10.0",
+		"curvejs": "^0.3.4",
+		"element-ui": "^1.4.13",
+		"extract-text-webpack-plugin": "^2.1.0",
+		"file-loader": "^0.11.1",
+		"html-webpack-plugin": "^2.30.1",
+		"lodash": "^4.17.15",
+		"moment": "^2.24.0",
+		"opn": "^5.5.0",
+		"postcss-loader": "^2.1.6",
+		"shelljs": "^0.7.6",
+		"style-loader": "^0.16.1",
+		"url-loader": "^0.5.8",
+		"vue": "^2.6.10",
+		"vue-loader": "^11.3.3",
+		"vue-style-loader": "^3.1.2",
+		"vue-template-compiler": "^2.6.10",
+		"webpack": "^2.7.0",
+		"webpack-dev-server": "^2.11.5",
+		"webpack-merge": "^4.2.2"
+	},
+	"scripts": {
+		"dev": "node build/dev-server.js",
+		"build": "node build/build.js"
+	},
+	"engines": {
+		"node": ">= 6.0.0",
+		"npm": ">= 3.0.0"
+	},
+	"author": "baoer.gu",
+	"license": "MIT"
 }
