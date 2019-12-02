@@ -25,6 +25,9 @@
     "eslint-plugin-flowtype": "^4.5.2",
     "eslint-plugin-html": "^6.0.0",
     "eslint-plugin-vue": "^5.0.0",
-    "vue-template-compiler": "^2.6.10"
+    "html-webpack-plugin": "^4.0.0-beta.11",
+    "vue-template-compiler": "^2.6.10",
+    "webpack": "^4.41.2",
+    "webpack-cli": "^3.3.10"
   }
 }
