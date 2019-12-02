@@ -1,11 +1,13 @@
+
 <template>
   <div class="page-container" style="height:100%;">
+      <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:400,500,700,400italic|Material+Icons">
     <md-app md-waterfall md-mode="fixed">
       <md-app-toolbar class="md-primary andrew-nav">
         <md-button
           style="float:left:"
           class="md-icon-button"
-          onclick="toggleMenu"
+          v-on:click.native="toggleMenu()"
           v-if="!menuVisible"
         >
           <md-icon>menu</md-icon>
