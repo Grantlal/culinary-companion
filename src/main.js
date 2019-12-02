@@ -14,4 +14,12 @@ new Vue({
     el: '#app',
     render: h => h(App)
 });
+Vue.component('async', function (resolve, reject) {
+	setTimeout(function () {
+	  // Pass the component definition to the resolve callback
+	  resolve({
+		template: '<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:400,500,700,400italic|Material+Icons">'
+	  })
+	}, 1000)
+  })
 

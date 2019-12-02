@@ -3,8 +3,7 @@
     <md-card>
       <md-card-media>
         <img
-          
-          src="this.image"
+          :src="this.image"
           alt="People"
         />
       </md-card-media>
@@ -33,8 +32,9 @@
           </md-card-expand-trigger>
         </md-card-actions>
 
-        <md-card-expand-content>
-          <md-card-content>{{this.instructions}}</md-card-content>
+        <md-card-expand-content> 
+          <md-card-content style="height:150px; overflow-y: auto; overflow-x: hidden;">
+            <div v-for="x in this.instructions">{{x}}</div></md-card-content> <!-- eslint-disable-line -->
         </md-card-expand-content>
       </md-card-expand>
     </md-card>
