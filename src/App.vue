@@ -226,7 +226,7 @@ export default {
       try {
         if (this.query !== null) {
           //this.query = this.query.replace(/\s+/g, '');
-          var url = `http://localhost:8080/recipes/?search=${String(
+          var url = `https://culinary-companion-api.herokuapp.com/recipes/?search=${String(
             this.query
           )}`;
           const response = await fetch(url).then(resp => resp.json());
