@@ -1,8 +1,17 @@
 import Vue from 'vue'
 import App from './App.vue'
 
-Vue.config.productionTip = false
+// Andrew
+import VueMaterial from 'vue-material'
+import 'vue-material/dist/vue-material.min.css'
+Vue.use(VueMaterial)
+import 'vue-material/dist/theme/black-green-light.css'
+import axios from 'axios'
+Object.defineProperty(Vue.prototype, '$axios', { value: axios });
 
+// eslint-disable-next-line no-new
 new Vue({
-  render: h => h(App),
-}).$mount('#app')
+    el: '#app',
+    render: h => h(App)
+});
+
