@@ -716,11 +716,12 @@ export default {
           if (this.OPT__LowFat) param += `&health=low-fat-abs`;
           if (this.OPT__LowSodium) param += `&health=low-sodium`;
           //this.query = this.query.replace(/\s+/g, '');
-          var url = `https://culinary-companion-api.herokuapp.com/recipes/?search=$%7BString(
+          var url = `https://culinary-companion-api.herokuapp.com/recipes/?search=${String(
             this.query
-          )}${String(param)}`;
+		  )}${String(param)}`;
+		  url.replace("%20", "");
 
-          const response = await fetch(url).then(resp => resp.json());
+		  const response = await fetch(url).then(resp => resp.json());
           this.recipes = [];
           for (var index in response) {
             this.recipes.push(response[index]);
