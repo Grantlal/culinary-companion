@@ -1,11 +1,9 @@
 <template>
   <div class="card-expansion">
+    <Overlay ref="over" v-if="this.overlay"></Overlay>
     <md-card>
       <md-card-media>
-        <img
-          :src="this.image"
-          alt="People"
-        />
+        <img :src="this.image" alt="People" />
       </md-card-media>
 
       <md-card-header>
@@ -22,7 +20,7 @@
             <md-button v-if="!fav" v-model="favorite" @click="favorite">
               <md-icon>star</md-icon>
             </md-button>
-            <md-button>View</md-button>
+            <md-button @click="view">View</md-button>
           </div>
 
           <md-card-expand-trigger>
@@ -32,9 +30,11 @@
           </md-card-expand-trigger>
         </md-card-actions>
 
-        <md-card-expand-content> 
+          <!-- eslint-disable -->
+        <md-card-expand-content>
           <md-card-content style="height:150px; overflow-y: auto; overflow-x: hidden;">
-            <div v-for="x in this.instructions">{{x}}</div></md-card-content> <!-- eslint-disable-line -->
+            <div v-for="x in this.instructions">{{x}}</div>
+          </md-card-content>
         </md-card-expand-content>
       </md-card-expand>
     </md-card>
@@ -42,18 +42,28 @@
 </template>
 
 <script>
+import Overlay from "./Overlay.vue";
+
 export default {
   name: "CardExpansion",
   props: ["title", "dietLabels", "healthLabels", "instructions", "image"],
   data() {
     return {
-      fav: true
+      fav: true,
+      overlay: false
     };
   },
   methods: {
     favorite() {
       this.fav = !this.fav;
+    },
+    view() {
+      this.overlay = !this.overlay;
+      this.$refs.over;
     }
+  },
+  components: {
+    Overlay
   }
 };
 </script>

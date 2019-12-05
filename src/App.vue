@@ -562,41 +562,39 @@
           <md-list-item md-expand>
             <span class="md-list-item-text">Nuts</span>
             <md-list slot="md-expand" class="bc-trans hamburger-submenu">
+              <md-list-item>
+                <md-checkbox id="peanutbox" v-model="OPT__PeanutFree" class="md-primary">
+                  <label
+                    @click="OPT__PeanutFree = !OPT__PeanutFree"
+                    for="peanutbox"
+                    v-if="OPT__PeanutFree"
+                    class="clickable strk-thru"
+                  >Peanuts</label>
+                  <label
+                    @click="OPT__PeanutFree = !OPT__PeanutFree"
+                    for="peanutbox"
+                    v-if="!OPT__PeanutFree"
+                    class="clickable"
+                  >Peanuts</label>
+                </md-checkbox>
+              </md-list-item>
 
-            <md-list-item>
-              <md-checkbox id="peanutbox" v-model="OPT__PeanutFree" class="md-primary">
-                <label
-                  @click="OPT__PeanutFree = !OPT__PeanutFree"
-                  for="peanutbox"
-                  v-if="OPT__PeanutFree"
-                  class="clickable strk-thru"
-                >Peanuts</label>
-                <label
-                  @click="OPT__PeanutFree = !OPT__PeanutFree"
-                  for="peanutbox"
-                  v-if="!OPT__PeanutFree"
-                  class="clickable"
-                >Peanuts</label>
-              </md-checkbox>
-            </md-list-item>
-
-            <md-list-item>
-              <md-checkbox id="tnutbox" v-model="OPT__TreeNutFree" class="md-primary">
-                <label
-                  @click="OPT__TreeNutFree = !OPT__TreeNutFree"
-                  for="tnutbox"
-                  v-if="OPT__TreeNutFree"
-                  class="clickable strk-thru"
-                >Tree Nuts</label>
-                <label
-                  @click="OPT__TreeNutFree = !OPT__TreeNutFree"
-                  for="tnutbox"
-                  v-if="!OPT__TreeNutFree"
-                  class="clickable"
-                >Tree Nuts</label>
-              </md-checkbox>
-            </md-list-item>
-			
+              <md-list-item>
+                <md-checkbox id="tnutbox" v-model="OPT__TreeNutFree" class="md-primary">
+                  <label
+                    @click="OPT__TreeNutFree = !OPT__TreeNutFree"
+                    for="tnutbox"
+                    v-if="OPT__TreeNutFree"
+                    class="clickable strk-thru"
+                  >Tree Nuts</label>
+                  <label
+                    @click="OPT__TreeNutFree = !OPT__TreeNutFree"
+                    for="tnutbox"
+                    v-if="!OPT__TreeNutFree"
+                    class="clickable"
+                  >Tree Nuts</label>
+                </md-checkbox>
+              </md-list-item>
             </md-list>
           </md-list-item>
         </md-list>
@@ -612,6 +610,7 @@
             :image="rec.recipe.image"
           ></RecipeCard>
         </div>
+        <div id="balls"></div>
       </md-app-content>
     </md-app>
   </div>
@@ -666,9 +665,10 @@ export default {
       query: null,
       recipeExample: null,
       recipes: [],
+      techniqueurl: [],
       menuVisible: false
     };
-  },    
+  },
   methods: {
     toggleMenu() {
       this.menuVisible = !this.menuVisible;
@@ -716,24 +716,36 @@ export default {
           if (this.OPT__LowCarb) param += `&health=low-carb`;
           if (this.OPT__LowFat) param += `&health=low-fat-abs`;
           if (this.OPT__LowSodium) param += `&health=low-sodium`;
-          //this.query = this.query.replace(/\s+/g, '');
-          var url = `https://culinary-companion-api.herokuapp.com/recipes/?search=${String(
-            this.query
-		  )}${String(param)}`;
-		  url.replace("%20", "");
 
-		  const response = await fetch(url).then(resp => resp.json());
+          //http://localhost:8080/techniques?searchTag=steak
+
+          //this.query = this.query.replace(/\s+/g, '');
+          //var url = `https://culinary-companion-api.herokuapp.com/recipes/?search=${String(
+          var url = `http://localhost:8080/recipes/?search=${String(
+            this.query
+          )}${String(param)}`;
+          url.replace("%20", "");
+
+          var response = await fetch(url).then(resp => resp.json());
           this.recipes = [];
           for (var index in response) {
             this.recipes.push(response[index]);
           }
           console.log("Recipes:");
           console.log(this.recipes);
-        } else {
-          this.recipeExample = "Search is null";
         }
       } catch (error) {
-        this.recipeExample = "Error connecting to database.";
+        console.error(error);
+      }
+      try {
+        var tech = `http://localhost:8080/techniques/Url?searchName=${String(
+          this.query
+        )}`;
+        var balls = await fetch(tech).then((resp) => resp.text())
+		console.log(balls);
+		
+        document.getElementById("balls").innerHTML = JSON.stringify(balls);
+      } catch (error) {
         console.error(error);
       }
     }
@@ -795,11 +807,11 @@ export default {
 table {
   width: 100%;
   table-layout: fixed;
-
-  th {
-    text-align: left;
-  }
 }
+table th {
+  text-align: left;
+}
+
 .md-app {
   min-height: 350px;
   border: 1px solid rgba(#000, 0.12);
