@@ -611,6 +611,28 @@
           ></RecipeCard>
         </div>
         <div id="balls"></div>
+        <div id="overlay">
+          <div id="overlay_white" class="overlay bc-white">
+            <div id="overlay_exit" @click="toggleOverlay" class="overlay">X</div>
+            <div>
+              <h1 id="overlay_title" class="overlay">This is a Title</h1>
+              <br />
+              <br />
+              <br />
+              <iframe
+                src="https://www.youtube.com/embed/tgbNymZ7vqY"
+                width="560"
+                height="315"
+                frameborder="0"
+                allowfullscreen
+              ></iframe>
+			  <div>
+				  <h2 id="overlay_instructions"></h2>
+			  </div>
+            </div>
+          </div>
+        </div>
+        <md-button @click="toggleOverlay">asdf</md-button>
       </md-app-content>
     </md-app>
   </div>
@@ -666,10 +688,20 @@ export default {
       recipeExample: null,
       recipes: [],
       techniqueurl: [],
-      menuVisible: false
+      menuVisible: false,
+      overlay_on: false
     };
   },
   methods: {
+    toggleOverlay() {
+      this.overlay_on = !this.overlay_on;
+      if (this.overlay_on) {
+        document.getElementById("overlay").style.display = "block";
+      } else {
+        document.getElementById("overlay").style.display = "none";
+      }
+      console.log(this.overlay_on);
+    },
     toggleMenu() {
       this.menuVisible = !this.menuVisible;
     },
@@ -741,9 +773,9 @@ export default {
         var tech = `http://localhost:8080/techniques/Url?searchName=${String(
           this.query
         )}`;
-        var balls = await fetch(tech).then((resp) => resp.text())
-		console.log(balls);
-		
+        var balls = await fetch(tech).then(resp => resp.text());
+        console.log(balls);
+
         document.getElementById("balls").innerHTML = JSON.stringify(balls);
       } catch (error) {
         console.error(error);
@@ -758,6 +790,42 @@ export default {
 </script>
 
 <style>
+#overlay {
+  position: fixed;
+  display: none;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 2;
+  cursor: pointer;
+}
+.overlay {
+  z-index: 3;
+}
+#overlay_white {
+  width: 50%;
+  height: 80%;
+  position: absolute;
+  left: 50%;
+  -ms-transform: translate(-50%, 10%); /* IE 9 */
+  -webkit-transform: translate(-50%, 10%); /* Safari prior 9.0 */
+  transform: translate(-50%, 10%); /* Standard syntax */
+}
+#overlay_exit {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+}
+#overlay_title {
+  position: absolute;
+  left: 30px;
+  overflow: hidden;
+}
+
 .bc-trans {
   background-color: transparent !important;
 }

@@ -1,6 +1,5 @@
 <template>
   <div class="card-expansion">
-    <Overlay ref="over" v-if="this.overlay"></Overlay>
     <md-card>
       <md-card-media>
         <img :src="this.image" alt="People" />
@@ -20,7 +19,7 @@
             <md-button v-if="!fav" v-model="favorite" @click="favorite">
               <md-icon>star</md-icon>
             </md-button>
-            <md-button @click="view">View</md-button>
+            <md-button @click="toggleOverlay">View</md-button>
           </div>
 
           <md-card-expand-trigger>
@@ -30,7 +29,7 @@
           </md-card-expand-trigger>
         </md-card-actions>
 
-          <!-- eslint-disable -->
+        <!-- eslint-disable -->
         <md-card-expand-content>
           <md-card-content style="height:150px; overflow-y: auto; overflow-x: hidden;">
             <div v-for="x in this.instructions">{{x}}</div>
@@ -42,28 +41,32 @@
 </template>
 
 <script>
-import Overlay from "./Overlay.vue";
-
 export default {
   name: "CardExpansion",
   props: ["title", "dietLabels", "healthLabels", "instructions", "image"],
   data() {
     return {
       fav: true,
-      overlay: false
+      overlay_on: false
     };
   },
   methods: {
     favorite() {
       this.fav = !this.fav;
     },
-    view() {
-      this.overlay = !this.overlay;
-      this.$refs.over;
+    toggleOverlay() {
+      this.overlay_on = !this.overlay_on;
+      if (this.overlay_on) {
+        document.getElementById("overlay").style.display = "block";
+        document.getElementById("overlay_title").innerHTML = this.title;
+        document.getElementById(
+          "overlay_instructions"
+        ).innerHTML += this.instructions;
+      } else {
+        document.getElementById("overlay").style.display = "none";
+      }
+      console.log(this.overlay_on);
     }
-  },
-  components: {
-    Overlay
   }
 };
 </script>
