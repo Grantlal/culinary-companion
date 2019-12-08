@@ -634,7 +634,6 @@
             </div>
           </div>
         </div>
-        <md-button @click="toggleOverlay">asdf</md-button>
       </md-app-content>
     </md-app>
   </div>
