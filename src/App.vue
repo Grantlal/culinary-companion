@@ -562,41 +562,39 @@
           <md-list-item md-expand>
             <span class="md-list-item-text">Nuts</span>
             <md-list slot="md-expand" class="bc-trans hamburger-submenu">
+              <md-list-item>
+                <md-checkbox id="peanutbox" v-model="OPT__PeanutFree" class="md-primary">
+                  <label
+                    @click="OPT__PeanutFree = !OPT__PeanutFree"
+                    for="peanutbox"
+                    v-if="OPT__PeanutFree"
+                    class="clickable strk-thru"
+                  >Peanuts</label>
+                  <label
+                    @click="OPT__PeanutFree = !OPT__PeanutFree"
+                    for="peanutbox"
+                    v-if="!OPT__PeanutFree"
+                    class="clickable"
+                  >Peanuts</label>
+                </md-checkbox>
+              </md-list-item>
 
-            <md-list-item>
-              <md-checkbox id="peanutbox" v-model="OPT__PeanutFree" class="md-primary">
-                <label
-                  @click="OPT__PeanutFree = !OPT__PeanutFree"
-                  for="peanutbox"
-                  v-if="OPT__PeanutFree"
-                  class="clickable strk-thru"
-                >Peanuts</label>
-                <label
-                  @click="OPT__PeanutFree = !OPT__PeanutFree"
-                  for="peanutbox"
-                  v-if="!OPT__PeanutFree"
-                  class="clickable"
-                >Peanuts</label>
-              </md-checkbox>
-            </md-list-item>
-
-            <md-list-item>
-              <md-checkbox id="tnutbox" v-model="OPT__TreeNutFree" class="md-primary">
-                <label
-                  @click="OPT__TreeNutFree = !OPT__TreeNutFree"
-                  for="tnutbox"
-                  v-if="OPT__TreeNutFree"
-                  class="clickable strk-thru"
-                >Tree Nuts</label>
-                <label
-                  @click="OPT__TreeNutFree = !OPT__TreeNutFree"
-                  for="tnutbox"
-                  v-if="!OPT__TreeNutFree"
-                  class="clickable"
-                >Tree Nuts</label>
-              </md-checkbox>
-            </md-list-item>
-			
+              <md-list-item>
+                <md-checkbox id="tnutbox" v-model="OPT__TreeNutFree" class="md-primary">
+                  <label
+                    @click="OPT__TreeNutFree = !OPT__TreeNutFree"
+                    for="tnutbox"
+                    v-if="OPT__TreeNutFree"
+                    class="clickable strk-thru"
+                  >Tree Nuts</label>
+                  <label
+                    @click="OPT__TreeNutFree = !OPT__TreeNutFree"
+                    for="tnutbox"
+                    v-if="!OPT__TreeNutFree"
+                    class="clickable"
+                  >Tree Nuts</label>
+                </md-checkbox>
+              </md-list-item>
             </md-list>
           </md-list-item>
         </md-list>
@@ -611,6 +609,30 @@
             :instructions="rec.ingredientLines"
             :image="rec.recipe.image"
           ></RecipeCard>
+        </div>
+        <div id="balls"></div>
+        <div id="overlay">
+          <div id="overlay_white" class="overlay bc-white">
+            <div id="overlay_exit" @click="toggleOverlay" class="overlay">X</div>
+            <div>
+              <h1 id="overlay_title" class="overlay">This is a Title</h1>
+              <br />
+              <br />
+              <br />
+              <div id="youtube">
+                <iframe
+                  src="https://www.youtube.com/embed/tgbNymZ7vqY"
+                  width="560"
+                  height="315"
+                  frameborder="0"
+                  allowfullscreen
+                ></iframe>
+              </div>
+              <div>
+                <h2 id="overlay_instructions"></h2>
+              </div>
+            </div>
+          </div>
         </div>
       </md-app-content>
     </md-app>
@@ -666,10 +688,22 @@ export default {
       query: null,
       recipeExample: null,
       recipes: [],
-      menuVisible: false
+      techniqueurl: [],
+      menuVisible: false,
+	  overlay_on: false,
+	  url: ''
     };
-  },    
+  },
   methods: {
+    toggleOverlay() {
+      this.overlay_on = !this.overlay_on;
+      if (this.overlay_on) {
+        document.getElementById("overlay").style.display = "block";
+      } else {
+        document.getElementById("overlay").style.display = "none";
+      }
+      console.log(this.overlay_on);
+    },
     toggleMenu() {
       this.menuVisible = !this.menuVisible;
     },
@@ -716,26 +750,50 @@ export default {
           if (this.OPT__LowCarb) param += `&health=low-carb`;
           if (this.OPT__LowFat) param += `&health=low-fat-abs`;
           if (this.OPT__LowSodium) param += `&health=low-sodium`;
-          //this.query = this.query.replace(/\s+/g, '');
-          var url = `https://culinary-companion-api.herokuapp.com/recipes/?search=${String(
-            this.query
-		  )}${String(param)}`;
-		  url.replace("%20", "");
 
-		  const response = await fetch(url).then(resp => resp.json());
+          this.query = this.query.replace('%20', '');
+          var url = `https://culinary-companion-api.herokuapp.com/recipes/?search=${String(
+            //var url = `http://localhost:8080/recipes/?search=${String(
+            this.query
+          )}${String(param)}`;
+          url.replace("%20", "");
+
+          var response = await fetch(url).then(resp => resp.json());
           this.recipes = [];
           for (var index in response) {
             this.recipes.push(response[index]);
           }
           console.log("Recipes:");
           console.log(this.recipes);
-        } else {
-          this.recipeExample = "Search is null";
         }
       } catch (error) {
-        this.recipeExample = "Error connecting to database.";
         console.error(error);
       }
+      try {
+        //var tech = `http://localhost:8080/techniques/Url?searchName=${String(
+        var tech = `https://culinary-companion-api.herokuapp.com/techniques/Url?searchName=${String(
+          this.query
+        )}`;
+        var response2 = await fetch(tech).then(resp => resp.text());
+        console.log(response2);
+        this.url = response2;
+        console.log(this.url);
+
+        // document.getElementById("balls").innerHTML = JSON.stringify(response2);
+      } catch (error) {
+        console.error(error);
+      }
+
+      document.getElementById("youtube").innerHTML = `
+                <iframe
+                  src="${this.url}"
+                  width="560"
+                  height="315"
+                  frameborder="0"
+				  allowfullscreen
+				  style="height: 500px; width: 800px;"
+				></iframe>`;
+				console.log(this.url)
     }
   },
   name: "app",
@@ -746,6 +804,46 @@ export default {
 </script>
 
 <style>
+#youtube {
+	height: 500px;
+}
+
+#overlay {
+  position: fixed;
+  display: none;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 2;
+  cursor: pointer;
+}
+.overlay {
+  z-index: 3;
+}
+#overlay_white {
+  width: 50%;
+  height: 80%;
+  position: absolute;
+  left: 50%;
+  -ms-transform: translate(-50%, 10%); /* IE 9 */
+  -webkit-transform: translate(-50%, 10%); /* Safari prior 9.0 */
+  transform: translate(-50%, 10%); /* Standard syntax */
+}
+#overlay_exit {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+}
+#overlay_title {
+  position: absolute;
+  left: 30px;
+  overflow: hidden;
+}
+
 .bc-trans {
   background-color: transparent !important;
 }
@@ -795,11 +893,11 @@ export default {
 table {
   width: 100%;
   table-layout: fixed;
-
-  th {
-    text-align: left;
-  }
 }
+table th {
+  text-align: left;
+}
+
 .md-app {
   min-height: 350px;
   border: 1px solid rgba(#000, 0.12);
