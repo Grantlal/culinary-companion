@@ -619,16 +619,18 @@
               <br />
               <br />
               <br />
-              <iframe
-                src="https://www.youtube.com/embed/tgbNymZ7vqY"
-                width="560"
-                height="315"
-                frameborder="0"
-                allowfullscreen
-              ></iframe>
-			  <div>
-				  <h2 id="overlay_instructions"></h2>
-			  </div>
+              <div id="youtube">
+                <iframe
+                  src="https://www.youtube.com/embed/tgbNymZ7vqY"
+                  width="560"
+                  height="315"
+                  frameborder="0"
+                  allowfullscreen
+                ></iframe>
+              </div>
+              <div>
+                <h2 id="overlay_instructions"></h2>
+              </div>
             </div>
           </div>
         </div>
@@ -689,7 +691,8 @@ export default {
       recipes: [],
       techniqueurl: [],
       menuVisible: false,
-      overlay_on: false
+	  overlay_on: false,
+	  url: ''
     };
   },
   methods: {
@@ -749,11 +752,9 @@ export default {
           if (this.OPT__LowFat) param += `&health=low-fat-abs`;
           if (this.OPT__LowSodium) param += `&health=low-sodium`;
 
-          //http://localhost:8080/techniques?searchTag=steak
-
-          //this.query = this.query.replace(/\s+/g, '');
-          //var url = `https://culinary-companion-api.herokuapp.com/recipes/?search=${String(
-          var url = `http://localhost:8080/recipes/?search=${String(
+          this.query = this.query.replace('%20', '');
+          var url = `https://culinary-companion-api.herokuapp.com/recipes/?search=${String(
+            //var url = `http://localhost:8080/recipes/?search=${String(
             this.query
           )}${String(param)}`;
           url.replace("%20", "");
@@ -770,16 +771,30 @@ export default {
         console.error(error);
       }
       try {
-        var tech = `http://localhost:8080/techniques/Url?searchName=${String(
+        //var tech = `http://localhost:8080/techniques/Url?searchName=${String(
+        var tech = `https://culinary-companion-api.herokuapp.com/techniques/Url?searchName=${String(
           this.query
         )}`;
-        var balls = await fetch(tech).then(resp => resp.text());
-        console.log(balls);
+        var response2 = await fetch(tech).then(resp => resp.text());
+        console.log(response2);
+        this.url = response2;
+        console.log(this.url);
 
-        document.getElementById("balls").innerHTML = JSON.stringify(balls);
+        // document.getElementById("balls").innerHTML = JSON.stringify(response2);
       } catch (error) {
         console.error(error);
       }
+
+      document.getElementById("youtube").innerHTML = `
+                <iframe
+                  src="${this.url}"
+                  width="560"
+                  height="315"
+                  frameborder="0"
+				  allowfullscreen
+				  style="height: 500px; width: 800px;"
+				></iframe>`;
+				console.log(this.url)
     }
   },
   name: "app",
@@ -790,6 +805,10 @@ export default {
 </script>
 
 <style>
+#youtube {
+	height: 500px;
+}
+
 #overlay {
   position: fixed;
   display: none;
