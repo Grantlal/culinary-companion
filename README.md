@@ -1,24 +1,28 @@
 # culinarycompanion
 
-## Project setup
-```
-npm install
-```
+### Getting Started
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+-   install Node.js / NPM
+    https://nodejs.org/en/
 
-### Compiles and minifies for production
-```
-npm run build
-```
+-   Clone Repository
 
-### Lints and fixes files
-```
-npm run lint
-```
+          git clone https://github.com/grantlal/culinary-companion
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+### Installation and Set-up
+
+####  Build front-end environment
+
+            npm install
+
+#### Running front-end
+In order to run the front-end Web Page
+
+          npm run serve
+You can also run `cd springboot_vue/frontend;npm run build`
+
+### Testing
+You'll have to have the front-end running and then run cypress with the following command
+```
+npm run cypress:open
+```
