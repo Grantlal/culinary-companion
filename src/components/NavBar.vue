@@ -1,6 +1,6 @@
 <template>
   <div class="andrew-nav md-toolbar">
-    <md-button class="md-icon-button" @click="toggleMenu">
+    <md-button class="md-icon-button" v-on:click.native="emitToggle">
       <md-icon md-light>menu</md-icon>
     </md-button>
 
@@ -57,14 +57,15 @@ import VueMaterial from "vue-material";
 import "vue-material/dist/vue-material.min.css";
 
 export default {
-  methods: {
-    toggleMenu() {
-      this.$emit("update:menuVisible", !menuVisible);
-    }
-  },
   props: {
-    menuVisible:  Boolean,
+    menuVisible: Boolean,
     query: String
+  },
+  methods: {
+	  emitToggle(event) {
+		  this.menuVisible = !this.menuVisible;
+		  this.$emit('toggleDrawer', this.menuVisible);
+	  }
   }
 };
 </script>

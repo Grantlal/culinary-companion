@@ -1,10 +1,10 @@
 <template>
   <md-app>
     <md-app-toolbar>
-      <NavBar :menuVisible="this.menuVisible"/>
+      <NavBar :menuVisible="this.visible" v-on:toggleDrawer="toggleMenu" />
     </md-app-toolbar>
 
-    <md-app-drawer v-show="menuVisible" :md-active.sync="menuVisible">
+    <md-app-drawer v-on:toggleDrawer="toggleMenu" :md-active.sync="visible">
       <filters />
     </md-app-drawer>
   </md-app>
@@ -18,12 +18,16 @@ export default {
     Filters,
     NavBar
   },
+  methods: {
+	  toggleMenu(value) {
+		  this.visible = value;
+	  }
+  },
   data: () => ({
-    menuVisible: false
+	visible: false,
   })
 };
 </script>
-
 
 <style scoped>
 .md-drawer {
