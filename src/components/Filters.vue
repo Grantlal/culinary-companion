@@ -404,7 +404,7 @@
         <span class="md-list-item-text">Meats</span>
         <md-list slot="md-expand" class="bc-trans hamburger-submenu">
           <md-list-item>
-            <md-checkbox id="beefbox" v-model="OPT__BeefFree" class="md-primary">
+            <md-checkbox id="beefbox" v-model="OPT__BeefFree">
               <label
                 @click="OPT__BeefFree = !OPT__BeefFree"
                 for="beefbox"
@@ -421,7 +421,7 @@
           </md-list-item>
 
           <md-list-item>
-            <md-checkbox id="chickenbox" v-model="OPT__ChickenFree" class="md-primary">
+            <md-checkbox id="chickenbox" v-model="OPT__ChickenFree" >
               <label
                 @click="OPT__ChickenFree = !OPT__ChickenFree"
                 for="chickenbox"
@@ -438,7 +438,7 @@
           </md-list-item>
 
           <md-list-item>
-            <md-checkbox id="porkbox" v-model="OPT__PorkFree" class="md-primary">
+            <md-checkbox id="porkbox" v-model="OPT__PorkFree" >
               <label
                 @click="OPT__PorkFree = !OPT__PorkFree"
                 for="porkbox"
@@ -455,7 +455,7 @@
           </md-list-item>
 
           <md-list-item>
-            <md-checkbox id="redmeatbox" v-model="OPT__RedMeatFree" class="md-primary">
+            <md-checkbox id="redmeatbox" v-model="OPT__RedMeatFree" >
               <label
                 @click="OPT__RedMeatFree = !OPT__RedMeatFree"
                 for="redmeatbox"
@@ -476,7 +476,7 @@
         <span class="md-list-item-text">Nuts</span>
         <md-list slot="md-expand" class="bc-trans hamburger-submenu">
           <md-list-item>
-            <md-checkbox id="peanutbox" v-model="OPT__PeanutFree" class="md-primary">
+            <md-checkbox id="peanutbox" v-model="OPT__PeanutFree" >
               <label
                 @click="OPT__PeanutFree = !OPT__PeanutFree"
                 for="peanutbox"
@@ -493,7 +493,7 @@
           </md-list-item>
 
           <md-list-item>
-            <md-checkbox id="tnutbox" v-model="OPT__TreeNutFree" class="md-primary">
+            <md-checkbox id="tnutbox" v-model="OPT__TreeNutFree" >
               <label
                 @click="OPT__TreeNutFree = !OPT__TreeNutFree"
                 for="tnutbox"
@@ -516,47 +516,95 @@
 
 <script>
 export default {
-  data() {
-    return {
-      OPT__AlcoholFree: false, //
-      OPT__PorkFree: false, //
-      OPT__BeefFree: false, //
-      OPT__ChickenFree: false, //
-      OPT__RedMeatFree: false, //
-      OPT__CeleryFree: false,
-      OPT__crustaceanFree: false,
-      OPT__DairyFree: false,
-      OPT__EggFree: false,
-      OPT__FishFree: false,
-      OPT__FodmapFree: false, //
-      OPT__GlutenFree: false, //
-      OPT__KetoFriendly: false, //
-      OPT__kidneyFriendly: false, //
-      OPT__Kosher: false, //
-      OPT__LowPotassium: false, //
-      OPT__LupineFree: false,
-      OPT__MustardFree: false,
-      OPT__LowFat: false, //
-      OPT__NoOilAdded: false,
-      OPT__LowSugar: false, //
-      OPT__Paleo: false, //
-      OPT__PeanutFree: false, //
-      OPT__Pecatarian: false, //
-      OPT__SesameFree: false, //
-      OPT__ShellfishFree: false, //
-      OPT__SoyFree: false, //
-      OPT__SugarConscious: false, //
-      OPT__TreeNutFree: false, //
-      OPT__Vegan: false, //
-      OPT__Vegetarian: false, //
-      OPT__WheatFree: false, //
-      OPT__Balanced: false, //
-      OPT__HighFiber: false, //
-      OPT__HighProtein: false, //
-      OPT__LowCarb: false, //
-      OPT__LowSodium: false, //
-    };
-  }
+  data: () => ({
+    param: "",
+    OPT__AlcoholFree: false, //
+    OPT__PorkFree: false, //
+    OPT__BeefFree: false, //
+    OPT__ChickenFree: false, //
+    OPT__RedMeatFree: false, //
+    OPT__CeleryFree: false,
+    OPT__crustaceanFree: false,
+    OPT__DairyFree: false,
+    OPT__EggFree: false,
+    OPT__FishFree: false,
+    OPT__FodmapFree: false, //
+    OPT__GlutenFree: false, //
+    OPT__KetoFriendly: false, //
+    OPT__kidneyFriendly: false, //
+    OPT__Kosher: false, //
+    OPT__LowPotassium: false, //
+    OPT__LupineFree: false,
+    OPT__MustardFree: false,
+    OPT__LowFat: false, //
+    OPT__NoOilAdded: false,
+    OPT__LowSugar: false, //
+    OPT__Paleo: false, //
+    OPT__PeanutFree: false, //
+    OPT__Pecatarian: false, //
+    OPT__SesameFree: false, //
+    OPT__ShellfishFree: false, //
+    OPT__SoyFree: false, //
+    OPT__SugarConscious: false, //
+    OPT__TreeNutFree: false, //
+    OPT__Vegan: false, //
+    OPT__Vegetarian: false, //
+    OPT__WheatFree: false, //
+    OPT__Balanced: false, //
+    OPT__HighFiber: false, //
+    OPT__HighProtein: false, //
+    OPT__LowCarb: false, //
+    OPT__LowSodium: false //
+  }),
+  methods: {
+    getRecipe: async function(event) {
+		param ="";
+      if (this.OPT__AlcoholFree) param += `&health=alcohol-free`;
+      if (this.OPT__PorkFree) param += `&excluded=pork`;
+      if (this.OPT__BeefFree) param += `&excluded=beef`;
+      if (this.OPT__ChickenFree) param += `&excluded=chicken`;
+      if (this.OPT__CeleryFree) param += `&health=celery-free`;
+      if (this.OPT__crustaceanFree) param += `&health=crustacean-free`;
+      if (this.OPT__DairyFree) param += `&health=dairy-free`;
+      if (this.OPT__EggFree) param += `&health=egg-free`;
+      if (this.OPT__FishFree) param += `&health=fish-free`;
+      if (this.OPT__FodmapFree) param += `&health=fodmap-free`;
+      if (this.OPT__GlutenFree) param += `&health=gluten-free`;
+      if (this.OPT__KetoFriendly) param += `&health=keto-friendly`;
+      if (this.OPT__kidneyFriendly) param += `&health=kidney-friendly`;
+      if (this.OPT__Kosher) param += `&health=kosher`;
+      if (this.OPT__LowPotassium) param += `&health=low-potassium`;
+      if (this.OPT__LupineFree) param += `&health=lupine-free`;
+      if (this.OPT__MustardFree) param += `&health=mustard-free`;
+      if (this.OPT__LowFat) param += `&health=low-fat`;
+      if (this.OPT__NoOilAdded) param += `&health=no-oil-added`;
+      if (this.OPT__LowSugar) param += `&health=low-sugar`;
+      if (this.OPT__Paleo) param += `&health=paleo`;
+      if (this.OPT__PeanutFree) param += `&health=peanut-free`;
+      if (this.OPT__Pecatarian) param += `&health=pecatarian`;
+      if (this.OPT__PorkFree) param += `&health=pork-free`;
+      if (this.OPT__RedMeatFree) param += `&health=red-meat-free`;
+      if (this.OPT__SesameFree) param += `&health=sesame-free`;
+      if (this.OPT__ShellfishFree) param += `&health=shellfish-free`;
+      if (this.OPT__SoyFree) param += `&health=soy-free`;
+      if (this.OPT__SugarConscious) param += `&health=sugar-conscious`;
+      if (this.OPT__TreeNutFree) param += `&health=tree-nut-free`;
+      if (this.OPT__Vegan) param += `&health=vegan`;
+      if (this.OPT__Vegetarian) param += `&health=vegetarian`;
+      if (this.OPT__WheatFree) param += `&health=wheat-free`;
+      if (this.OPT__Balanced) param += `&health=balanced`;
+      if (this.OPT__HighFiber) param += `&health=high-fiber`;
+      if (this.OPT__HighProtein) param += `&health=high-protein`;
+      if (this.OPT__LowCarb) param += `&health=low-carb`;
+      if (this.OPT__LowFat) param += `&health=low-fat-abs`;
+      if (this.OPT__LowSodium) param += `&health=low-sodium`;
+    }
+  },
+	  emitParam(event) {
+		  getRecipe();
+		  console.log(this.param);
+		  this.$emit('getParam', this.param);
+	  }
 };
 </script>
 

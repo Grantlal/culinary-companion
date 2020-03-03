@@ -34,11 +34,11 @@
     <div style="margin-left: auto; min-width: 300px; max-width:500px;">
       <md-field style="min-width: 300px; max-width:500px;">
         <label>Search Recipes</label>
-        <md-input v-model="query"></md-input>
+        <md-input v-model="searchString"></md-input>
       </md-field>
     </div>
 
-    <md-button class="md-raised" style="margin-right: 40px;" v-on:click.native="getRecipe()">SEARCH</md-button>
+    <md-button class="md-raised" style="margin-right: 40px;" v-on:click.native="emitRecipe">SEARCH</md-button>
 
     <md-menu class="bc-trans" md-size="medium" md-align-trigger>
       <md-button class="md-icon-button" style="width: 100%;" md-menu-trigger>
@@ -58,15 +58,22 @@ import "vue-material/dist/vue-material.min.css";
 
 export default {
   props: {
-    menuVisible: Boolean,
-    query: String
+    menuVisible: Boolean
   },
   methods: {
 	  emitToggle(event) {
-		  this.menuVisible = !this.menuVisible;
-		  this.$emit('toggleDrawer', this.menuVisible);
+		  this.visible = !this.menuVisible;
+		  this.$emit('toggleDrawer', this.visible);
+	  },
+	  emitRecipe() {
+		  //console.log("Search String: " + this.searchString);
+		  this.$emit('recipeString', this.searchString);
 	  }
-  }
+  },
+  data: () => ({
+	  visible: false,
+	  searchString: "",
+  })
 };
 </script>
 
@@ -75,7 +82,6 @@ export default {
   width: 230px;
   max-width: calc(100vw - 125px);
 }
-
 .nav-title {
   color: black !important;
   font-size: 18px;

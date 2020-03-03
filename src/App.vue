@@ -36,18 +36,6 @@ export default {
       overlay_on: false,
       url: ""
     };
-  },
-
-  methods: {
-    toggleOverlay() {
-      this.overlay_on = !this.overlay_on;
-      if (this.overlay_on) {
-        document.getElementById("overlay").style.display = "block";
-      } else {
-        document.getElementById("overlay").style.display = "none";
-      }
-      console.log(this.overlay_on);
-    }
   }
 };
 </script>

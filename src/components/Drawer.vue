@@ -1,30 +1,43 @@
 <template>
   <md-app>
     <md-app-toolbar>
-      <NavBar :menuVisible="this.visible" v-on:toggleDrawer="toggleMenu" />
+      <NavBar v-bind:menuVisible="this.visible" v-on:toggleDrawer="toggleMenu" v-on:recipeString="getRecipe" />
     </md-app-toolbar>
 
     <md-app-drawer v-on:toggleDrawer="toggleMenu" :md-active.sync="visible">
-      <filters />
+      <filters v-bind:param="this.parameters" v-on:emitParam="getParams" />
     </md-app-drawer>
+    <md-app-content id="cont">
+		<Recipes />
+    </md-app-content>
   </md-app>
 </template>
 
 <script>
 import Filters from "./Filters.vue";
 import NavBar from "./NavBar.vue";
+import Recipes from "./Recipes.vue";
 export default {
   components: {
     Filters,
-    NavBar
+    NavBar,
+	Recipes
   },
   methods: {
-	  toggleMenu(value) {
-		  this.visible = value;
-	  }
+    toggleMenu(value) {
+      this.visible = value;
+	},
+	getParams(value) {
+		this.parameters = value;
+	},
+	getRecipe(value) {
+		this.query = value;
+	}
   },
   data: () => ({
 	visible: false,
+	parameters: "",
+	query: "",
   })
 };
 </script>
@@ -34,7 +47,6 @@ export default {
   width: 230px;
   max-width: calc(100vw - 125px);
 }
-
 .nav-title {
   color: black !important;
   font-size: 18px;
