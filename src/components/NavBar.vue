@@ -66,7 +66,7 @@ export default {
 		  this.$emit('toggleDrawer', this.visible);
 	  },
 	  emitRecipe() {
-		  //console.log("Search String: " + this.searchString);
+		  console.log("Search String: " + this.searchString);
 		  this.$emit('recipeString', this.searchString);
 	  }
   },

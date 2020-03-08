@@ -8,7 +8,7 @@
       <filters v-bind:param="this.parameters" v-on:emitParam="getParams" />
     </md-app-drawer>
     <md-app-content id="cont">
-		<Recipes />
+		<Recipes v-bind:recipes="this.recipeJSON" />
     </md-app-content>
   </md-app>
 </template>
@@ -30,14 +30,29 @@ export default {
 	getParams(value) {
 		this.parameters = value;
 	},
-	getRecipe(value) {
+	getRecipe: async function(value) {
+		console.log("asdf");
 		this.query = value;
+		//bounce off of api
+		 var url = `https://culinary-companion-api.herokuapp.com/recipes/?search=${String(
+            //var url = `http://localhost:8080/recipes/?search=${String(
+            this.query
+          )}${String(this.parameters)}`;
+          url.replace("%20", "");
+          var response = await fetch(url).then(resp => resp.json());
+          this.recipeJSON = [];
+          for (var index in response) {
+            this.recipeJSON.push(response[index]);
+          }
+          console.log("Recipes:");
+          console.log(this.recipeJSON);
 	}
   },
   data: () => ({
 	visible: false,
 	parameters: "",
 	query: "",
+	recipeJSON: []
   })
 };
 </script>
