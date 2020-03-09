@@ -8,7 +8,15 @@
       <filters v-bind:param="this.parameters" v-on:emitParam="getParams" />
     </md-app-drawer>
     <md-app-content id="cont">
-		<Recipes v-bind:recipes="this.recipeJSON" />
+		<div id="recipecards" v-for="rec in recipeJSON" v-bind:key="rec.calories">
+          <RecipeCard
+            class="recipes"
+            :title="rec.recipe.label"
+            :dietLabels="rec.dietlabels"
+            :instructions="rec.ingredientLines"
+            :image="rec.recipe.image"
+          ></RecipeCard>
+        </div>
     </md-app-content>
   </md-app>
 </template>
@@ -16,12 +24,12 @@
 <script>
 import Filters from "./Filters.vue";
 import NavBar from "./NavBar.vue";
-import Recipes from "./Recipes.vue";
+import RecipeCard from "./RecipeCard.vue";
 export default {
   components: {
+	  RecipeCard,
     Filters,
     NavBar,
-	Recipes
   },
   methods: {
     toggleMenu(value) {
@@ -31,7 +39,7 @@ export default {
 		this.parameters = value;
 	},
 	getRecipe: async function(value) {
-		console.log("asdf");
+		console.log("getRecipe()");
 		this.query = value;
 		//bounce off of api
 		 var url = `https://culinary-companion-api.herokuapp.com/recipes/?search=${String(
