@@ -1,6 +1,6 @@
 <template>
 <router-link
-to="/home"
+to="/"
 id="linkless">
   <span id="title">Culinary Companion</span>
 </router-link>
