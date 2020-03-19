@@ -44,9 +44,13 @@
       <md-button class="md-icon-button" style="width: 100%;" md-menu-trigger>
         <md-icon>person</md-icon>
       </md-button>
-      <md-menu-content>
+      <md-menu-content v-if="!$auth.loading">  
         <md-menu-item class="bc-white">Account Settings</md-menu-item>
-        <md-menu-item class="bc-white">Logout</md-menu-item>
+      <!-- show login when not authenticated -->
+      <md-menu-item class="bc-white" v-if="!$auth.isAuthenticated" @click="login">Log in</md-menu-item>
+      <!-- show logout when authenticated -->
+      <md-menu-item class="bc-white" v-if="$auth.isAuthenticated" @click="logout">Log out</md-menu-item>
+    
       </md-menu-content>
     </md-menu>
   </div>
@@ -68,7 +72,17 @@ export default {
 	  emitRecipe() {
 		  console.log("Search String: " + this.searchString);
 		  this.$emit('recipeString', this.searchString);
-	  }
+	  },
+    // Log the user in
+    login() {
+      this.$auth.loginWithRedirect();
+    },
+    // Log the user out
+    logout() {
+      this.$auth.logout({
+        returnTo: window.location.origin
+      });
+    }
   },
   data: () => ({
 	  visible: false,

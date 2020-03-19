@@ -10,7 +10,6 @@
 </template>
 
 <script>
-import RecipeCard from "./components/RecipeCard.vue";
 import CCHeader from "./components/Header.vue";
 import Drawer from "./components/Drawer.vue";
 
@@ -21,7 +20,6 @@ export default {
   name: "app",
 
   components: {
-    //  RecipeCard,
     CCHeader,
     Drawer
   },
