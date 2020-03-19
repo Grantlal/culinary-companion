@@ -34,7 +34,7 @@
     <div style="margin-left: auto; min-width: 300px; max-width:500px;">
       <md-field style="min-width: 300px; max-width:500px;">
         <label>Search Recipes</label>
-        <md-input v-model="searchString"></md-input>
+        <md-input @focus="$event.target.select()" v-model="searchString"></md-input>
       </md-field>
     </div>
 
