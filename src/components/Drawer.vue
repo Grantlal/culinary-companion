@@ -9,7 +9,7 @@
 		</md-app-drawer>
 		<md-app-content id="cont">
 			<div id="recipecards" v-for="rec in recipeJSON" v-bind:key="rec.calories">
-				<RecipeCard2
+				<RecipeCard
 					class="recipes"
 					:title="rec.recipe.label"
 					:dietLabels="rec.dietlabels"
@@ -19,7 +19,7 @@
 				<div id="balls"></div>
 				<div id="overlay">
 					<div id="overlay_white" class="overlay bc-white">
-						<div id="overlay_exit" @click="toggleOverlay" class="overlay">X</div>
+						<div id="overlay_exit" @click.native="toggleOverlay" class="overlay">X</div>
 						<div>
 							<h1 id="overlay_title" class="overlay">This is a Title</h1>
 							<br />
@@ -48,10 +48,10 @@
 <script>
 import Filters from './Filters.vue';
 import NavBar from './NavBar.vue';
-import RecipeCard2 from './RecipeCard2.vue';
+import RecipeCard from './RecipeCard.vue';
 export default {
 	components: {
-		RecipeCard2,
+		RecipeCard,
 		Filters,
 		NavBar,
 	},
