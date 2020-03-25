@@ -64,11 +64,11 @@ export default {
         ).innerHTML += this.instructions;
       } else {
         document.getElementById("overlay").style.display = "none";
-	  }
+      }
       console.log(this.overlay_on);
     }
   }
-  }
+};
 </script>
 
 <style scoped>
