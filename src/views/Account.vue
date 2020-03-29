@@ -1,7 +1,7 @@
 <template>
-	<div>
-		<Profile />
-	</div>
+  <div class="page-container" id="app">
+	<Profile />
+  </div>
 </template>
 
 <script>
