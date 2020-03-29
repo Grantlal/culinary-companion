@@ -9,18 +9,12 @@
 		</md-app-drawer>
 		<md-app-content id="cont">
 			<div id="recipecards" v-for="rec in recipeJSON" v-bind:key="rec.calories">
-				<RecipeCard
+				<RecipeCard2
 					class="recipes"
 					:title="rec.recipe.label"
 					:dietLabels="rec.dietlabels"
 					:instructions="rec.ingredientLines"
 					:image="rec.recipe.image"
-				/>
-				<RecipeCard
-					class="recipes"
-					:title="asdf"
-					:dietLabels="fdsa"
-					:instructions="asdfasdfasdfasdf"
 				/>
 
 				<div id="balls"></div>
@@ -55,10 +49,10 @@
 <script>
 import Filters from './Filters.vue';
 import NavBar from './NavBar.vue';
-import RecipeCard from './RecipeCard.vue';
+import RecipeCard2 from './RecipeCard2.vue';
 export default {
 	components: {
-		RecipeCard,
+		RecipeCard2,
 		Filters,
 		NavBar,
 	},
