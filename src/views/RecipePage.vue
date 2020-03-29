@@ -1,13 +1,18 @@
 <template>
-    <div class="page-container" id="app">This is the page where all of the recipes information will be displayed</div>
+  <div>
+    <RecipeInfo />
+  </div>
 </template>
 
 <script>
-
 import VueMaterial from "vue-material";
 import "vue-material/dist/vue-material.min.css";
+import RecipeInfo from "../components/RecipeInfo.vue";
 
 export default {
-  name: "recipePage"
+  name: "recipePage",
+  components: {
+    RecipeInfo
   }
+};
 </script>
