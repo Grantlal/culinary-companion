@@ -1,20 +1,32 @@
 <template>
-  <div class="home">
-        <div v-if="!$auth.loading">
-      <!-- show login when not authenticated -->
-      <button v-if="!$auth.isAuthenticated" @click="login">Log in</button>
-      <!-- show logout when authenticated -->
-      <button v-if="$auth.isAuthenticated" @click="logout">Log out</button>
-    </div>
+  <div class="page-container" id="app">
+    <Drawer />
   </div>
 </template>
 
 <script>
+import Drawer from "@/components/Drawer.vue";
+
+import VueMaterial from "vue-material";
+import "vue-material/dist/vue-material.min.css";
 // @ is an alias to /src
 
 export default {
   name: "home",
   components: {
+    Drawer
+  },
+
+  data() {
+    return {
+      query: null,
+      recipeExample: null,
+      recipes: [],
+      techniqueurl: [],
+      menuVisible: false,
+      overlay_on: false,
+      url: ""
+    };
   }
 }
 </script>

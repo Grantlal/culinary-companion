@@ -16,6 +16,13 @@
 					:instructions="rec.ingredientLines"
 					:image="rec.recipe.image"
 				/>
+				<RecipeCard
+					class="recipes"
+					:title="asdf"
+					:dietLabels="fdsa"
+					:instructions="asdfasdfasdfasdf"
+				/>
+
 				<div id="balls"></div>
 				<div id="overlay">
 					<div id="overlay_white" class="overlay bc-white">
