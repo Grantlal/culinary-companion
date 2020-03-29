@@ -3,6 +3,7 @@ import VueRouter from 'vue-router';
 import Home from '../views/Home.vue';
 import Account from '../views/Account.vue';
 import About from '../views/About.vue';
+import RecipePage from '../views/RecipePage.vue';
 
 Vue.use(VueRouter);
 
@@ -25,9 +26,14 @@ const routes = [{
     //component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
   },
   {
-    path: '//account',
+    path: '/account',
     name: 'account',
     component: Account,
+  },
+  {
+    path: '/recipePage',
+    name: 'recipepage',
+    component: RecipePage,
   },
 ];
 
