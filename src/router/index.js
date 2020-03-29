@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import Account from '../views/Account.vue'
 import About from '../views/About.vue'
+import RecipePage from '../views/RecipePage.vue'
 
 Vue.use(VueRouter)
 
@@ -29,6 +30,11 @@ const routes = [
     path: "//account",
     name: "account",
     component: Account
+  },
+  {
+    path: "/recipePage",
+    name: "recipePage",
+    componen: RecipePage
   }
 ]
 
