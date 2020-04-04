@@ -1,6 +1,6 @@
 <template>
   <div class="page-container" id="app">
-	<div>
+	<div style="height: 100%">
       <img :src="$auth.user.picture">
       <h2>{{ $auth.user.name }}</h2>
       <p>{{ $auth.user.email }}</p>
