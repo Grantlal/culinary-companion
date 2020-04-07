@@ -16,31 +16,6 @@
 					:instructions="rec.ingredientLines"
 					:image="rec.recipe.image"
 				/>
-
-				<div id="balls"></div>
-				<div id="overlay">
-					<div id="overlay_white" class="overlay bc-white">
-						<div id="overlay_exit" @click.native="toggleOverlay" class="overlay">X</div>
-						<div>
-							<h1 id="overlay_title" class="overlay">This is a Title</h1>
-							<br />
-							<br />
-							<br />
-							<div id="youtube">
-								<iframe
-									src="https://www.youtube.com/embed/tgbNymZ7vqY"
-									width="560"
-									height="315"
-									frameborder="0"
-									allowfullscreen
-								></iframe>
-							</div>
-							<div>
-								<h2 id="overlay_instructions"></h2>
-							</div>
-						</div>
-					</div>
-				</div>
 			</div>
 		</md-app-content>
 	</md-app>
@@ -104,5 +79,8 @@ export default {
 .page-container {
 	display: flex;
 	flex-direction: column;
+}
+.md-drawer.md-theme-default {
+	background-color: #F5F5F5;
 }
 </style>
