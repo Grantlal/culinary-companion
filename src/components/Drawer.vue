@@ -47,7 +47,8 @@ export default {
       console.log("getRecipe()");
       var url = "https://culinarycompanionhome.azurewebsites.net/recipehome";
       var searchBody = {
-        query: "beef",
+        query:
+          "beef" /*,
         cuisine: "",
         excludeCuisine: "",
         diet: "",
@@ -110,24 +111,28 @@ export default {
         minSugar: "",
         maxSugar: "",
         minZinc: "",
-        maxZinc: "",
+        maxZinc: "",*/,
       };
 
-      var response = fetch(url, {
-        mode: "no-cors",
+      let response = await fetch(url, {
         method: "Post",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: searchBody,
-      }).then((resp) => resp.json);
+        body: JSON.stringify(searchBody),
+      });
 
-      this.recipeJSON = [];
+      let data = await response.text();
+      console.log("data");
+      console.log(JSON.parse(data));
+
+      response = JSON.parse(data);
+      console.log("response");
+      console.log(response);
+
+      /*this.recipeJSON = [];
       for (var index in response) {
         this.recipeJSON.push(response[index]);
       }
       console.log("Recipes:");
-      console.log(this.recipeJSON);
+      console.log(this.recipeJSON);*/
     },
   },
   data: () => ({
