@@ -120,19 +120,14 @@ export default {
       });
 
       let data = await response.text();
-      console.log("data");
-      console.log(JSON.parse(data));
-
       response = JSON.parse(data);
-      console.log("response");
-      console.log(response);
 
-      /*this.recipeJSON = [];
+      this.recipeJSON = [];
       for (var index in response) {
         this.recipeJSON.push(response[index]);
       }
       console.log("Recipes:");
-      console.log(this.recipeJSON);*/
+      console.log(this.recipeJSON);
     },
   },
   data: () => ({
