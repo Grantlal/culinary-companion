@@ -119,6 +119,9 @@ export default {
       var response = fetch(url, {
         mode: "no-cors",
         method: "Post",
+        headers: {
+          "Content-Type": "application/json"
+        },
         body: searchBody
       }).then(resp => resp.json);
 
