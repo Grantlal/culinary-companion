@@ -33,7 +33,7 @@ export default {
   components: {
     RecipeCard2,
     Filters,
-    NavBar
+    NavBar,
   },
   methods: {
     toggleMenu(value) {
@@ -110,20 +110,17 @@ export default {
         minSugar: "",
         maxSugar: "",
         minZinc: "",
-        maxZinc: ""
+        maxZinc: "",
       };
-
-      //bounce off of api
-      url.replace(`%20`, "");
 
       var response = fetch(url, {
         mode: "no-cors",
         method: "Post",
         headers: {
-          "Content-Type": "application/json"
+          "Content-Type": "application/json",
         },
-        body: searchBody
-      }).then(resp => resp.json);
+        body: searchBody,
+      }).then((resp) => resp.json);
 
       this.recipeJSON = [];
       for (var index in response) {
@@ -131,14 +128,14 @@ export default {
       }
       console.log("Recipes:");
       console.log(this.recipeJSON);
-    }
+    },
   },
   data: () => ({
     visible: false,
     parameters: "",
     query: "",
-    recipeJSON: []
-  })
+    recipeJSON: [],
+  }),
 };
 </script>
 
