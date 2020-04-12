@@ -33,7 +33,7 @@ export default {
   components: {
     RecipeCard2,
     Filters,
-    NavBar,
+    NavBar
   },
   methods: {
     toggleMenu(value) {
@@ -111,12 +111,12 @@ export default {
         minSugar: "",
         maxSugar: "",
         minZinc: "",
-        maxZinc: "",*/,
+        maxZinc: "",*/
       };
 
       let response = await fetch(url, {
         method: "Post",
-        body: JSON.stringify(searchBody),
+        body: JSON.stringify(searchBody)
       });
 
       let data = await response.text();
@@ -128,14 +128,14 @@ export default {
       }
       console.log("Recipes:");
       console.log(this.recipeJSON);
-    },
+    }
   },
   data: () => ({
     visible: false,
     parameters: "",
     query: "",
-    recipeJSON: [],
-  }),
+    recipeJSON: []
+  })
 };
 </script>
 
