@@ -46,9 +46,8 @@ export default {
     getRecipe: async function(value) {
       console.log("getRecipe()");
       var url = "https://culinarycompanionhome.azurewebsites.net/recipehome";
-      var searchBody = {
-        query:
-          "beef" /*,
+      var searchBod = {
+        query: "beef",
         cuisine: "",
         excludeCuisine: "",
         diet: "",
@@ -111,8 +110,23 @@ export default {
         minSugar: "",
         maxSugar: "",
         minZinc: "",
-        maxZinc: "",*/
+        maxZinc: ""
       };
+
+      const removeEmptyOrNull = obj => {
+        Object.keys(obj).forEach(
+          k =>
+            (obj[k] &&
+              typeof obj[k] === "object" &&
+              removeEmptyOrNull(obj[k])) ||
+            (!obj[k] && obj[k] !== undefined && delete obj[k])
+        );
+        return obj;
+      };
+
+      let searchBody = removeEmptyOrNull(searchBod);
+
+      console.log(searchBody);
 
       let response = await fetch(url, {
         method: "Post",
