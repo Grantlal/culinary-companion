@@ -47,7 +47,7 @@ export default {
       console.log("getRecipe()");
       var url = "https://culinarycompanionhome.azurewebsites.net/recipehome";
       var searchBod = {
-        query: "beef",
+        query: value,
         cuisine: "",
         excludeCuisine: "",
         diet: "",
