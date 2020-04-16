@@ -12,14 +12,13 @@
       <filters v-bind:param="this.parameters" v-on:paramEmitted="getParams" />
     </md-app-drawer>
     <md-app-content id="cont">
-      <div id="recipecards" v-for="rec in recipeJSON" v-bind:key="rec.id">
+      <div id="recipecards" v-for="recipe in recipeJSON" v-bind:key="recipe.id">
         <!-- This is where the information is being populated -->
         <RecipeCard2
           class="recipes"
-          :title="rec.title"
-          :dietLabels="rec.recipes.title"
-          :instructions="rec.recipes.analyzedInstructions"
-          :image="rec.recipes.image"
+          :title="recipe.title"
+          :instructions="recipe.IngredientsInString"
+          :image="recipe.image"
         />
       </div>
     </md-app-content>
@@ -137,7 +136,7 @@ export default {
 
       this.recipeJSON = [];
       for (var index in response) {
-        for(var i = 0; i < 10; i++)
+        for(let i = 0; i < 3; i++)
         {
           this.recipeJSON.push(response[index][i]);
         }
@@ -145,9 +144,8 @@ export default {
 
       console.log("Recipes:");
       console.log(this.recipeJSON);
+      console.log("Recipe title");
       console.log(this.recipeJSON[0].title);
-
-      return this.recipeJSON;
     }
   },
   data: () => ({

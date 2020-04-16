@@ -20,7 +20,7 @@
 <script>
 export default {
   name: "CardExpansion",
-  props: ["title", "dietLabels", "healthLabels", "instructions", "image"],
+  props: ["title", "healthLabels", "instructions", "image"],
   data() {
     return {
       fav: true,
