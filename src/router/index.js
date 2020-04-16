@@ -30,6 +30,11 @@ const routes = [{
     name: 'account',
     component: Account,
   },
+  {
+    path: '/recipe/:id',
+    name: 'recipe',
+    component: RecipePage,
+  }
 ];
 
 const router = new VueRouter({

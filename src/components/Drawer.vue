@@ -19,6 +19,7 @@
           :title="recipe.title"
           :instructions="recipe.IngredientsInString"
           :image="recipe.image"
+          :id="recipe.id"
         />
       </div>
     </md-app-content>

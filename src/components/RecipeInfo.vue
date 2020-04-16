@@ -2,7 +2,7 @@
   <div
     class="page-container"
     id="app"
-  >This is the page where all of the recipes information will be displayed</div>
+  >{{$route.params.id}}</div>
 </template>
 
 <script>
@@ -11,3 +11,15 @@ export default {
   name: "RecipeInfo"
 };
 </script>
+
+<style>
+html,
+body {
+  font-size: 100%;
+}
+body {
+  padding: 0;
+  margin: 0;
+  background: white;
+}
+</style>

@@ -1,6 +1,7 @@
 <template>
   <div class="card-expansion">
-    <md-card>
+    <router-link :to="{name: 'recipe', params:{id: this.id}}">
+    <md-card md-with-hover>
       <article class="card">
         <div class="thumb">
           <img :src="this.image" alt="People" style="no-repeat; center;" />
@@ -14,13 +15,14 @@
         </div>
       </article>
     </md-card>
+    </router-link>
   </div>
 </template>
 
 <script>
 export default {
   name: "CardExpansion",
-  props: ["title", "healthLabels", "instructions", "image"],
+  props: ["title", "healthLabels", "instructions", "image", "id"],
   data() {
     return {
       fav: true,
@@ -80,6 +82,7 @@ body {
   margin: 4px;
   display: inline-block;
   vertical-align: top;
+  text-shadow: none!important;
 }
 .card-expansion {
   max-height: auto;
