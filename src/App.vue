@@ -1,18 +1,16 @@
 <template>
-  <div class="page-container">
+  <div class="page-container" id="app">
     <link
       rel="stylesheet"
       href="//fonts.googleapis.com/css?family=Roboto:400,500,700,400italic|Material+Icons"
     />
     <CCHeader />
-    <Drawer />
+    <router-view />
   </div>
 </template>
 
 <script>
-import RecipeCard from "./components/RecipeCard.vue";
 import CCHeader from "./components/Header.vue";
-import Drawer from "./components/Drawer.vue";
 
 import VueMaterial from "vue-material";
 import "vue-material/dist/vue-material.min.css";
@@ -21,9 +19,7 @@ export default {
   name: "app",
 
   components: {
-    //  RecipeCard,
-    CCHeader,
-    Drawer
+    CCHeader
   },
 
   data() {

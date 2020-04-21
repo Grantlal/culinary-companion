@@ -1,5 +1,9 @@
 <template>
+<router-link
+to="/"
+id="linkless">
   <span id="title">Culinary Companion</span>
+</router-link>
 </template>
 
 <script>
@@ -18,5 +22,9 @@ export default {};
   max-height: 100px;
   background-color: var(--md-theme-default-toolbarvariant, #f5f5f5);
   padding-left: 20px;
+}
+#linkless:hover {
+  color: black;
+  text-decoration: none;
 }
 </style>
