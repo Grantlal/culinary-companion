@@ -1,15 +1,15 @@
 <template>
   <div class="basic" id="app">
-    <h4 id="recipe-Name">{{ recipeName() }}</h4>
+    <h4 id="recipe-Name" style="text-align: center;">{{ recipeName() }}</h4>
     <md-card>
-      <md-card-media style="max-width: 500px;">
+      <md-card-media class="center">
         <img :src="recipeImage()" />
       </md-card-media>
 
       <h1>Ingredients</h1>
       <md-card-content style="border-style: solid;">
         <md-card
-          style="margin: 4px; display: inline-block;"
+          style="margin: 4px; display: inline-block; width: 24.4%;"
           v-for="ingredient in recipeIngredients()"
           :key="ingredient.id"
         >
@@ -24,14 +24,14 @@
 
             <md-card-media md-big>
               <img
-                style="height: 150px;"
+                style="width: auto; height: auto; max-height: 200px;"
                 :src="getUrl(ingredient.image)"
                 alt="People"
               />
             </md-card-media>
           </md-card-header>
 
-          <md-card-actions  style="width: 400;">
+          <md-card-actions>
             <md-button>Buy</md-button>
           </md-card-actions>
         </md-card>
@@ -40,17 +40,21 @@
       <h1>Instructions</h1>
       <md-card-content style="border-style: solid;">
         <md-card
-          style="margin: 4px; display: inline-block; width: 500px;"
+          style="margin: 4px; display: inline-block; width: 24.4%;"
           v-for="step in getAnalyzedInstructionsSteps()"
           :key="step.number"
         >
           <md-card-header>
             <md-card-header-text>
-              <div class="md-title">
-                Step Number {{ step.number }}
-              </div>
+              <div class="md-title">Step Number {{ step.number }}</div>
               <div class="md-subhead">
-                Ingredients
+                <b style="font-size: 18px;">Ingredients</b>
+                <div
+                  v-for="ingredients in step.ingredients"
+                  :key="mathRandom(ingredients)"
+                >
+                  {{ ingredients.name }}
+                </div>
               </div>
             </md-card-header-text>
 
@@ -68,7 +72,10 @@
           </md-card-header>
 
           <md-card-content>
-            {{ step.step }}
+            <div class="md-subhead">
+              <b style="font-size: 18px;">Step Instructions</b>
+            </div>
+            <div>{{ step.step }}</div>
           </md-card-content>
         </md-card>
       </md-card-content>
@@ -117,8 +124,11 @@ export default {
     getAnalyzedInstructionsSteps() {
       var foo = this.findRecipe();
       console.log(foo.analyzedInstructions[0].steps);
-      console.log(foo.analyzedInstructions[0].steps[0].ingredients[0]);
+      console.log(foo.analyzedInstructions[0].steps[0].ingredients[0].id);
       return foo.analyzedInstructions[0].steps;
+    },
+    mathRandom(i) {
+      return Math.random();
     },
     buttonPress() {
       console.log(this.findRecipe());
@@ -144,5 +154,14 @@ h4 {
   padding: 0;
   margin: 0;
   background: white;
+}
+.center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 500px;
+}
+h1 {
+  text-align: center;
 }
 </style>
