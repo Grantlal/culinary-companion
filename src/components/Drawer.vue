@@ -30,6 +30,7 @@
 import Filters from "./Filters.vue";
 import NavBar from "./NavBar.vue";
 import RecipeCard2 from "./RecipeCard2.vue";
+
 export default {
   components: {
     RecipeCard2,
@@ -147,6 +148,8 @@ export default {
       console.log(this.recipeJSON);
       console.log("Recipe title");
       console.log(this.recipeJSON[0].title);
+
+      this.$store.state.recipes = this.recipeJSON;
     }
   },
   data: () => ({
