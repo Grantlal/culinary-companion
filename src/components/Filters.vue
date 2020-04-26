@@ -839,6 +839,32 @@ export default {
 		console.log(this.param);
 		this.$emit('paramEmitted', this.param);
 	},
+	getSavedFilters: async function(value) {
+	  var url = "https://cc-myaccount.azurewebsites.net/api/accounts/1";
+
+	  let response = await fetch(url, {
+        method: "Post",
+        body: JSON.stringify(searchBody)
+      });
+
+      let data = await response.text();
+      response = JSON.parse(data);
+
+      this.recipeJSON = [];
+      for (var index in response) {
+        for(let i = 0; i < 3; i++)
+        {
+          this.recipeJSON.push(response[index][i]);
+        }
+      }
+
+      console.log("Recipes:");
+      console.log(this.recipeJSON);
+      console.log("Recipe title");
+      console.log(this.recipeJSON[0].title);
+
+      this.$store.state.account = this.recipeJSON;
+	}
 };
 </script>
 

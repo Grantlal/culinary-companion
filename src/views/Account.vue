@@ -4,6 +4,7 @@
       <img :src="$auth.user.picture">
       <h2>{{ $auth.user.name }}</h2>
       <p>{{ $auth.user.email }}</p>
+	  <h1>{{ $auth.user.id }}</h1>
     </div>
 
     <div>
