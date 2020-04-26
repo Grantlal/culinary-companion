@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import App from '@/App.vue';
+import store from './store/store';
 import VueMaterial from 'vue-material';
 import 'vue-material/dist/vue-material.min.css';
 import 'vue-material/dist/theme/black-green-light.css';
@@ -35,6 +36,7 @@ Vue.config.productionTip = false;
 // eslint-disable-next-line no-new
 new Vue({
 	el: '#app',
+	store,
 	router,
 	render: h => h(App),
 });

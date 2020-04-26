@@ -1,170 +1,167 @@
 <template>
-  <md-app>
-    <md-app-toolbar>
-      <NavBar
-        v-bind:menuVisible="this.visible"
-        v-on:toggleDrawer="toggleMenu"
-        v-on:recipeString="getRecipe"
-      />
-    </md-app-toolbar>
+  <div class="basic" id="app">
+    <h4 id="recipe-Name" style="text-align: center;">{{ recipeName() }}</h4>
+    <md-card>
+      <md-card-media class="center">
+        <img :src="recipeImage()" />
+      </md-card-media>
 
-    <md-app-drawer v-on:toggleDrawer="toggleMenu" :md-active.sync="visible">
-      <filters v-bind:param="this.parameters" v-on:paramEmitted="getParams" />
-    </md-app-drawer>
-    <md-app-content id="cont">
-		<div>
-        	{{$route.params.id}}
-		</div>
-    </md-app-content>
-  </md-app>
+      <h1>Ingredients</h1>
+      <md-card-content style="border-style: solid;">
+        <md-card
+          style="margin: 4px; display: inline-block; width: 24.4%;"
+          v-for="ingredient in recipeIngredients()"
+          :key="ingredient.id"
+        >
+          <md-card-header>
+            <md-card-header-text>
+              <div class="md-title">{{ ingredient.name }}</div>
+              <div class="md-subhead">
+                You can buy this from
+                <div>{{ "store name" }}</div>
+              </div>
+            </md-card-header-text>
+
+            <md-card-media md-big>
+              <img
+                style="width: auto; height: auto; max-height: 200px;"
+                :src="getUrl(ingredient.image)"
+                alt="People"
+              />
+            </md-card-media>
+          </md-card-header>
+
+          <md-card-actions>
+            <md-button>Buy</md-button>
+          </md-card-actions>
+        </md-card>
+      </md-card-content>
+
+      <h1>Instructions</h1>
+      <md-card-content style="border-style: solid;">
+        <md-card
+          style="margin: 4px; display: inline-block; width: 24.4%;"
+          v-for="step in getAnalyzedInstructionsSteps()"
+          :key="step.number"
+        >
+          <md-card-header>
+            <md-card-header-text>
+              <div class="md-title">Step Number {{ step.number }}</div>
+              <div class="md-subhead">
+                <b style="font-size: 18px;">Ingredients</b>
+                <div
+                  v-for="ingredients in step.ingredients"
+                  :key="mathRandom(ingredients)"
+                >
+                  {{ ingredients.name }}
+                </div>
+              </div>
+            </md-card-header-text>
+
+            <md-menu md-size="big" md-direction="bottom-end">
+              <md-button class="md-icon-button" md-menu-trigger>
+                <md-icon>more_vert</md-icon>
+              </md-button>
+              <md-menu-content>
+                <md-menu-item>
+                  <span>Buy Ingredients</span>
+                  <md-icon>food</md-icon>
+                </md-menu-item>
+              </md-menu-content>
+            </md-menu>
+          </md-card-header>
+
+          <md-card-content>
+            <div class="md-subhead">
+              <b style="font-size: 18px;">Step Instructions</b>
+            </div>
+            <div>{{ step.step }}</div>
+          </md-card-content>
+        </md-card>
+      </md-card-content>
+    </md-card>
+  </div>
 </template>
 
 <script>
-import Filters from "./Filters.vue";
-import NavBar from "./NavBar.vue";
+import VueMaterial from "vue-material";
+import "vue-material/dist/vue-material.min.css";
+
+// Make sure to look at header.vue for reference to the linking. From there I am on my own and need to figure out how to send information from recipecard to recipeinfo
 export default {
   name: "RecipeInfo",
-  components: {
-    Filters,
-    NavBar
+  computed: {
+    totalTvCount() {
+      var recipe = this.findRecipe();
+      return recipe;
+    },
   },
   methods: {
-    toggleMenu(value) {
-      this.visible = value;
-    },
-    getParams(value) {
-      this.parameters = value;
-      console.log("params: " + value);
-    },
-    getRecipe: async function(value) {
-      console.log("getRecipe()");
-      var url = "https://culinarycompanionhome.azurewebsites.net/recipehome";
-      var searchBod = {
-        query: value,
-        cuisine: "",
-        excludeCuisine: "",
-        diet: "",
-        intolerances: "",
-        equipment: "",
-        includeIngredients: "",
-        excludeIngredients: "",
-        type: "",
-        maxReadyTime: "",
-        minCarbs: "",
-        maxCarbs: "",
-        minProtein: "",
-        maxProtein: "",
-        minCalories: "",
-        maxCalories: "",
-        minFat: "",
-        maxFat: "",
-        minCaffeine: "",
-        maxCaffeine: "",
-        minCopper: "",
-        maxCopper: "",
-        minCalcium: "",
-        maxCalcium: "",
-        minCholesterol: "",
-        maxCholesterol: "",
-        minSaturatedFat: "",
-        maxSaturatedFat: "",
-        minVitaminA: "",
-        maxVitaminA: "",
-        minVitaminC: "",
-        maxVitaminC: "",
-        minVitaminD: "",
-        maxVitaminD: "",
-        minVitaminE: "",
-        maxVitaminE: "",
-        minVitaminK: "",
-        maxVitaminK: "",
-        minVitaminB1: "",
-        maxVitaminB1: "",
-        minVitaminB2: "",
-        maxVitaminB2: "",
-        minVitaminB5: "",
-        maxVitaminB5: "",
-        minVitaminB3: "",
-        maxVitaminB3: "",
-        minVitaminB6: "",
-        maxVitaminB6: "",
-        minVitaminB12: "",
-        maxVitaminB12: "",
-        minFiber: "",
-        maxFIber: "",
-        minIron: "",
-        maxIron: "",
-        minMagnesium: "",
-        maxMagnesium: "",
-        minPotassium: "",
-        maxPotassium: "",
-        minSodium: "",
-        maxSodium: "",
-        minSugar: "",
-        maxSugar: "",
-        minZinc: "",
-        maxZinc: ""
-      };
-
-      const removeEmptyOrNull = obj => {
-        Object.keys(obj).forEach(
-          k =>
-            (obj[k] &&
-              typeof obj[k] === "object" &&
-              removeEmptyOrNull(obj[k])) ||
-            (!obj[k] && obj[k] !== undefined && delete obj[k])
-        );
-        return obj;
-      };
-
-      let searchBody = removeEmptyOrNull(searchBod);
-
-      let response = await fetch(url, {
-        method: "Post",
-        body: JSON.stringify(searchBody)
-      });
-
-      let data = await response.text();
-      response = JSON.parse(data);
-
-      this.recipeJSON = [];
-      for (var index in response) {
-        for(let i = 0; i < 3; i++)
-        {
-          this.recipeJSON.push(response[index][i]);
+    findRecipe() {
+      var foo = this.$store.state.recipes;
+      for (var i = 0; i < foo.length; i++) {
+        if (foo[i].id == this.$route.params.id) {
+          return foo[i];
         }
       }
-
-      console.log("Recipes:");
-      console.log(this.recipeJSON);
-      console.log("Recipe title");
-      console.log(this.recipeJSON[0].title);
-    }
+      return "Nothing found";
+    },
+    recipeName() {
+      var foo = this.findRecipe();
+      return foo.title;
+    },
+    recipeImage() {
+      var foo = this.findRecipe();
+      return foo.image;
+    },
+    recipeIngredients() {
+      var foo = this.findRecipe();
+      return foo.Ingredients;
+    },
+    getUrl(ingredient) {
+      return "https://spoonacular.com/cdn/ingredients_500x500/" + ingredient;
+    },
+    getAnalyzedInstructionsSteps() {
+      var foo = this.findRecipe();
+      console.log(foo.analyzedInstructions[0].steps);
+      console.log(foo.analyzedInstructions[0].steps[0].ingredients[0].id);
+      return foo.analyzedInstructions[0].steps;
+    },
+    mathRandom(i) {
+      return Math.random();
+    },
+    buttonPress() {
+      console.log(this.findRecipe());
+    },
   },
-  data: () => ({
-    visible: false,
-    parameters: "",
-    query: "",
-    recipeJSON: []
-  })
 };
 </script>
 
-<style scoped>
-.md-drawer {
-  width: 230px;
-  max-width: calc(100vw - 125px);
+<style>
+html,
+body {
+  font-size: 100%;
+  padding: 0;
+  margin: 0;
+  background: white;
 }
-.nav-title {
-  color: black !important;
-  font-size: 18px;
-  line-height: 26px;
+h4 {
+  font-size: 200%;
+  text-align: center;
 }
-.page-container {
-  display: flex;
-  flex-direction: column;
+.basic {
+  font-size: 100%;
+  padding: 0;
+  margin: 0;
+  background: white;
 }
-.md-drawer.md-theme-default {
-  background-color: #f5f5f5;
+.center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 500px;
+}
+h1 {
+  text-align: center;
 }
 </style>
