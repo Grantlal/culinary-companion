@@ -1,17 +1,30 @@
 <template>
   <div>
-       {{this.$route.params.id}}
+    <md-card style="margin: 4px; display: inline-block; width: 24.4%;">
+      <md-card-media md-big>
+        <video-embed
+          src="https://www.youtube.com/watch?v=s4ObxcdXoFE"
+        ></video-embed>
+      </md-card-media>
+      <md-card-header>
+        Title
+      </md-card-header>
+    </md-card>
   </div>
 </template>
 
 <script>
 import VueMaterial from "vue-material";
 import "vue-material/dist/vue-material.min.css";
+import Vue from "vue";
+import Embed from "v-video-embed";
+
+// global register
+Vue.use(Embed);
 
 export default {
-     name: "techniquePage",
-  components: {
-  }
+  name: "techniquePage",
+  components: {},
 };
 </script>
 
