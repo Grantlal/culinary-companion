@@ -10,7 +10,7 @@
       md-size="medium"
       md-align-trigger
     >
-      <md-button md-menu-trigger>Recipes</md-button>
+      <md-button id="recipeTab" md-menu-trigger>Recipes</md-button>
       <md-menu-content>
         <md-menu-item class="bc-white">Advanced Search</md-menu-item>
         <md-menu-item class="bc-white" v-on:click.native="data = 'asdf'"
@@ -22,12 +22,12 @@
 
     <md-menu class="bc-trans" md-size="medium" md-align-trigger>
       <router-link :to="{ name: 'technique', params: { id: 'search' } }">
-        <md-button>Techniques</md-button>
+        <md-button id="techniqueTab">Techniques</md-button>
       </router-link>
     </md-menu>
 
     <md-menu class="bc-trans" md-size="medium" md-align-trigger>
-      <md-button md-menu-trigger>Favorites</md-button>
+      <md-button id="favoriteTab" md-menu-trigger>Favorites</md-button>
       <md-menu-content>
         <md-menu-item class="bc-white">Advanced Search</md-menu-item>
         <md-menu-item class="bc-white" v-on:click.native="data = 'asdf'"
