@@ -41,6 +41,7 @@
       <md-field style="min-width: 300px; max-width:500px;">
         <label>Search Recipes</label>
         <md-input
+          id="searchInput"
           v-on:keydown.enter="emitRecipe"
           @focus="$event.target.select()"
           v-model="searchString"
@@ -49,6 +50,7 @@
     </div>
 
     <md-button
+      id="searchButton"
       class="md-raised"
       style="margin-right: 40px;"
       v-on:click.native="emitRecipe"
@@ -56,7 +58,7 @@
     >
 
     <md-menu class="bc-trans" md-size="medium" md-align-trigger>
-      <md-button class="md-icon-button" style="width: 100%;" md-menu-trigger>
+      <md-button id = "loginButton" class="md-icon-button" style="width: 100%;" md-menu-trigger>
         <md-icon>person</md-icon>
       </md-button>
       <md-menu-content v-if="!$auth.loading">
@@ -65,6 +67,7 @@
         </router-link>
         <!-- show login when not authenticated -->
         <md-menu-item
+          id = "login"
           class="bc-white"
           v-if="!$auth.isAuthenticated"
           @click="login"

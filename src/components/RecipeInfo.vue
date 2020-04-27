@@ -32,7 +32,7 @@
           </md-card-header>
 
           <md-card-actions>
-            <md-button v-on:click.native="getSingleGrocery(ingredient.name)">Buy</md-button>
+            <md-button id="singleGroceryButton" v-on:click.native="getSingleGrocery(ingredient.name)">Buy</md-button>
           </md-card-actions>
         </md-card>
       </md-card-content>
