@@ -43,6 +43,19 @@
 		</div>
 
 		<md-button class="md-raised" style="margin-right: 40px;" v-on:click.native="emitRecipe">SEARCH</md-button>
+		<md-button class="md-raised" style="margin-right: 40px;" v-on:click.native="getGroceries">Grocery Boys</md-button>
+<form method="GET" action="https://www.amazon.com/gp/aws/cart/add.html"> 
+<input type="hidden" name="AWSAccessKeyId" value="Access Key ID" /><br/> 
+<input type="hidden" name="AssociateTag" value="Associate Tag" /><br/> 
+<p>One Product<br/> 
+ASIN:<input type="text" name="ASIN.1"/><br/> 
+Quantity:<input type="text" name="Quantity.1"/><br/> 
+<p>Another Product<br/> 
+ASIN:<input type="text" name="ASIN.2"/><br/> 
+Quantity:<input type="text" name="Quantity.2"/><br/> 
+</p> 
+<input type="submit" name="add" value="add" /> 
+</form>
 
 		<md-menu class="bc-trans" md-size="medium" md-align-trigger>
 			<md-button class="md-icon-button" style="width: 100%;" md-menu-trigger>
@@ -77,6 +90,25 @@ export default {
 		emitRecipe() {
 			console.log('Search String: ' + this.searchString);
 			this.$emit('recipeString', this.searchString);
+		},
+			getGroceries: async function() {
+		console.log("Grocery Boys");
+		var groceryUrl = "https://culinarycompanionhome.azurewebsites.net/grocerLink?keyword=steak";
+		var amazonUrl = "http://www.amazon.com/gp/aws/cart/add.html?ASIN.1=B001DTOCBK&Quantity.1=1";
+
+		let groceryResponse = await fetch(groceryUrl, {
+		method: "Get",
+		});
+		
+		
+
+		let groceryData = await groceryResponse.text();
+		//let amazonData = await amazonResponse.text();
+		window.location.replace("http://www.amazon.com/gp/aws/cart/add.html?ASIN.1=B001DTOCBK&Quantity.1=1");
+
+		console.log(groceryData);
+		
+		//response = JSON.parse(data);
 		},
 		// Log the user in
 		login() {
