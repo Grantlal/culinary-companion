@@ -35,7 +35,7 @@ export default {
   components: {
     RecipeCard2,
     Filters,
-    NavBar
+    NavBar,
   },
   methods: {
     toggleMenu(value) {
@@ -112,12 +112,12 @@ export default {
         minSugar: "",
         maxSugar: "",
         minZinc: "",
-        maxZinc: ""
+        maxZinc: "",
       };
 
-      const removeEmptyOrNull = obj => {
+      const removeEmptyOrNull = (obj) => {
         Object.keys(obj).forEach(
-          k =>
+          (k) =>
             (obj[k] &&
               typeof obj[k] === "object" &&
               removeEmptyOrNull(obj[k])) ||
@@ -130,7 +130,7 @@ export default {
 
       let response = await fetch(url, {
         method: "Post",
-        body: JSON.stringify(searchBody)
+        body: JSON.stringify(searchBody),
       });
 
       let data = await response.text();
@@ -138,26 +138,27 @@ export default {
 
       this.recipeJSON = [];
       for (var index in response) {
-        for(let i = 0; i < 3; i++)
-        {
+        for (let i = 0; i < 3; i++) { //change the 3 here
           this.recipeJSON.push(response[index][i]);
         }
       }
 
+      for (let i = 0; i < 3; i++) { //change the 3 here
+        this.recipeJSON.pop();
+      }
+
       console.log("Recipes:");
       console.log(this.recipeJSON);
-      console.log("Recipe title");
-      console.log(this.recipeJSON[0].title);
 
       this.$store.state.recipes = this.recipeJSON;
-    }
+    },
   },
   data: () => ({
     visible: false,
     parameters: "",
-    query: "",
-    recipeJSON: []
-  })
+    query: "", 
+    recipeJSON: [],
+  }), 
 };
 </script>
 

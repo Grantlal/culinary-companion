@@ -40,7 +40,7 @@
       <h1>Instructions</h1>
       <md-card-content style="border-style: solid;">
         <md-card
-          style="margin: 4px; display: inline-block; width: 24.4%;"
+          style="margin: 4px; display: inline-block; width: 100%;"
           v-for="step in getAnalyzedInstructionsSteps()"
           :key="step.number"
         >
