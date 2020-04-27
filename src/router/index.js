@@ -4,6 +4,7 @@ import Home from '../views/Home.vue';
 import Account from '../views/Account.vue';
 import About from '../views/About.vue';
 import RecipePage from '../views/RecipePage.vue';
+import TechniquePage from '../views/TechniquePage.vue';
 
 Vue.use(VueRouter);
 
@@ -34,6 +35,11 @@ const routes = [{
     path: '/recipe/:id',
     name: 'recipe',
     component: RecipePage,
+  },
+  {
+    path: '/technique/:id',
+    name: 'technique',
+    component: TechniquePage,
   }
 ];
 
