@@ -85,6 +85,8 @@ export default {
 		var amazonUrl = "http://www.amazon.com/gp/aws/cart/add.html?ASIN.1=";
 		console.log(this.searchString);
 
+		groceryUrl += this.searchString;
+
 		let groceryResponse = await fetch(groceryUrl, {
 		method: "Get",
 		});

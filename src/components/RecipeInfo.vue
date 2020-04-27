@@ -32,7 +32,7 @@
           </md-card-header>
 
           <md-card-actions>
-            <md-button v-on:click.native="getSingleGrocery">Buy</md-button>
+            <md-button v-on:click.native="getSingleGrocery(ingredient.name)">Buy</md-button>
           </md-card-actions>
         </md-card>
       </md-card-content>
@@ -40,7 +40,7 @@
       <h1>Instructions</h1>
       <md-card-content style="border-style: solid;">
         <md-card
-          style="margin: 4px; display: inline-block; width: 24.4%;"
+          style="margin: 4px; display: inline-block; width: 100%;"
           v-for="step in getAnalyzedInstructionsSteps()"
           :key="step.number"
         >
@@ -106,10 +106,12 @@ export default {
       }
       return "Nothing found";
     },
-    getSingleGrocery: async function() {
+    getSingleGrocery: async function(ingredient) {
 		console.log("Grocery Boys");
-		var groceryUrl = "https://culinarycompanionhome.azurewebsites.net/grocerLink?keyword=steak";
-		var amazonUrl = "http://www.amazon.com/gp/aws/cart/add.html?ASIN.1=";
+    var groceryUrl = "https://culinarycompanionhome.azurewebsites.net/grocerLink?keyword=";
+    groceryUrl += ingredient;
+    var amazonUrl = "http://www.amazon.com/gp/aws/cart/add.html?ASIN.1=";
+    console.log(groceryUrl);
 
 		let groceryResponse = await fetch(groceryUrl, {
 		method: "Get",
