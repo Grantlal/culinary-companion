@@ -12,6 +12,10 @@ export default new Vuex.Store({
 	}
   },
   getters: {
+	  getId()
+	  {
+		  return this.account.id;
+	  }
   },
   mutations: {
   },
