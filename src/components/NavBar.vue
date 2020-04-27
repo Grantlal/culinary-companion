@@ -96,6 +96,7 @@ export default {
 		console.log(amazonUrl);
 		//let amazonData = await amazonResponse.text();
 		//window.location.replace(amazonUrl);
+		window.open( amazonUrl, "_blank"); 
 
 		console.log(groceryData);
 		

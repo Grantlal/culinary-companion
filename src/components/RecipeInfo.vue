@@ -120,10 +120,7 @@ export default {
 		let groceryData = await groceryResponse.text();
 		amazonUrl += groceryData + "&Quantity.1=1";
 		console.log(amazonUrl);
-		//let amazonData = await amazonResponse.text();
-		window.location.replace(amazonUrl);
-		console.log(groceryData);
-		//response = JSON.parse(data);
+    window.open( amazonUrl, "_blank"); 		console.log(groceryData);
 		},
     recipeName() {
       var foo = this.findRecipe();
