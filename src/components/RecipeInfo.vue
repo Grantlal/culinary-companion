@@ -18,7 +18,7 @@
               <div class="md-title">{{ ingredient.name }}</div>
               <div class="md-subhead">
                 You can buy this from
-                <div>{{ "store name" }}</div>
+                <div>{{ "Amazon" }}</div>
               </div>
             </md-card-header-text>
 
@@ -32,7 +32,7 @@
           </md-card-header>
 
           <md-card-actions>
-            <md-button>Buy</md-button>
+            <md-button v-on:click.native="getSingleGrocery">Buy</md-button>
           </md-card-actions>
         </md-card>
       </md-card-content>
@@ -106,6 +106,23 @@ export default {
       }
       return "Nothing found";
     },
+    getSingleGrocery: async function() {
+		console.log("Grocery Boys");
+		var groceryUrl = "https://culinarycompanionhome.azurewebsites.net/grocerLink?keyword=steak";
+		var amazonUrl = "http://www.amazon.com/gp/aws/cart/add.html?ASIN.1=";
+
+		let groceryResponse = await fetch(groceryUrl, {
+		method: "Get",
+		});
+
+		let groceryData = await groceryResponse.text();
+		amazonUrl += groceryData + "&Quantity.1=1";
+		console.log(amazonUrl);
+		//let amazonData = await amazonResponse.text();
+		window.location.replace(amazonUrl);
+		console.log(groceryData);
+		//response = JSON.parse(data);
+		},
     recipeName() {
       var foo = this.findRecipe();
       return foo.title;
