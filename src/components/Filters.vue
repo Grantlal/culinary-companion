@@ -4,7 +4,7 @@
 
     <md-list class="bc-trans">
       <md-list-item md-expand>
-        <span class="md-list-item-text">Diets</span>
+        <span id="firstHamburger" class="md-list-item-text">Diets</span>
         <md-list slot="md-expand" class="bc-trans hamburger-submenu">
           <md-list-item>
             <md-checkbox id="alcoholFreebox" v-model="OPT__AlcoholFree">
@@ -539,7 +539,7 @@
       </md-list-item>
 
       <md-list-item md-expand>
-        <span class="md-list-item-text">Meats</span>
+        <span id="secondHamburger" class="md-list-item-text">Meats</span>
         <md-list slot="md-expand" class="bc-trans hamburger-submenu">
           <md-list-item>
             <md-checkbox id="beefbox" v-model="OPT__BeefFree">
@@ -635,7 +635,7 @@
         </md-list>
       </md-list-item>
       <md-list-item md-expand>
-        <span class="md-list-item-text">Nuts</span>
+        <span id="thirdHamburger" class="md-list-item-text">Nuts</span>
         <md-list slot="md-expand" class="bc-trans hamburger-submenu">
           <md-list-item>
             <md-checkbox id="peanutbox" v-model="OPT__PeanutFree">

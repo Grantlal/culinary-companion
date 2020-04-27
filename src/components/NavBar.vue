@@ -1,6 +1,6 @@
 <template>
   <div class="andrew-nav md-toolbar">
-    <md-button class="md-icon-button" v-on:click.native="emitToggle">
+    <md-button id="leftMenuButton" class="md-icon-button" v-on:click.native="emitToggle">
       <md-icon md-light>menu</md-icon>
     </md-button>
 
