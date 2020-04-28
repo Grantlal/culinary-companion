@@ -9,7 +9,7 @@
     </md-app-toolbar>
 
     <md-app-drawer v-on:toggleDrawer="toggleMenu" :md-active.sync="visible">
-      <filters v-bind:param="this.parameters" v-on:paramEmitted="getParams" />
+      <filtersPrototype v-bind:param="this.parameters" v-on:paramEmitted="getParams" />
     </md-app-drawer>
     <md-app-content id="cont">
       <div id="recipecards" v-for="recipe in recipeJSON" v-bind:key="recipe.id">
@@ -27,14 +27,14 @@
 </template>
 
 <script>
-import Filters from "./Filters.vue";
+import filtersPrototype from "./FiltersPrototype.vue";
 import NavBar from "./NavBar.vue";
 import RecipeCard2 from "./RecipeCard2.vue";
 
 export default {
   components: {
     RecipeCard2,
-    Filters,
+    filtersPrototype,
     NavBar,
   },
   methods: {
