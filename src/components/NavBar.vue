@@ -10,14 +10,10 @@
       md-size="medium"
       md-align-trigger
     >
-      <md-button md-menu-trigger>Recipes</md-button>
-      <md-menu-content>
-        <md-menu-item class="bc-white">Advanced Search</md-menu-item>
-        <md-menu-item class="bc-white" v-on:click.native="data = 'asdf'"
-          >Browse</md-menu-item
-        >
-        <md-menu-item class="bc-white">Surprise Me!</md-menu-item>
-      </md-menu-content>
+      <router-link :to="{ name: 'advancedSearch', params: { id: 'search' } }">
+        <md-button>Recipe</md-button>
+      </router-link>
+      
     </md-menu>
 
     <md-menu class="bc-trans" md-size="medium" md-align-trigger>

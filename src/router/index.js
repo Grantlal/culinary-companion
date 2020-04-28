@@ -5,6 +5,7 @@ import Account from '../views/Account.vue';
 import About from '../views/About.vue';
 import RecipePage from '../views/RecipePage.vue';
 import TechniquePage from '../views/TechniquePage.vue';
+import AdvancedSearch from '../views/AdvancedSearch'
 
 Vue.use(VueRouter);
 
@@ -40,6 +41,11 @@ const routes = [{
     path: '/technique/:id',
     name: 'technique',
     component: TechniquePage,
+  },
+  {
+    path: '/advancedSearch/:id',
+    name: 'advancedSearch',
+    component: AdvancedSearch,
   }
 ];
 
