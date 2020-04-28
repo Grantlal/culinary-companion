@@ -1,13 +1,14 @@
 <template>
   <div>
+     <Drawer />
     <md-card style="margin: 4px; display: inline-block; width: 24.4%;">
       <md-card-media md-big>
         <video-embed
-          src="https://www.youtube.com/watch?v=s4ObxcdXoFE"
+          src="https://www.youtube.com/embed/ZJy1ajvMU1k"
         ></video-embed>
       </md-card-media>
       <md-card-header>
-        Title
+        5 Basic Cooking Techniques
       </md-card-header>
     </md-card>
   </div>
@@ -18,13 +19,28 @@ import VueMaterial from "vue-material";
 import "vue-material/dist/vue-material.min.css";
 import Vue from "vue";
 import Embed from "v-video-embed";
+import Drawer from "@/components/TechniqueDrawer.vue";
 
 // global register
 Vue.use(Embed);
 
 export default {
   name: "techniquePage",
-  components: {},
+  components: {
+    Drawer
+  },
+
+  data() {
+    return {
+      query: null,
+      recipeExample: null,
+      recipes: [],
+      techniqueurl: [],
+      menuVisible: false,
+      overlay_on: false,
+      url: ""
+    };
+  }
 };
 </script>
 
