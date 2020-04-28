@@ -1,6 +1,6 @@
 <template>
   <div>
-    <md-toolbar class="md-transparent" md-elevation="0">Filters</md-toolbar>
+    <md-toolbar class="md-transparent" md-elevation="0" style="border-bottom: 1px solid black;">Filters</md-toolbar>
 
     <md-list class="bc-trans">
       <md-list-item md-expand>
@@ -539,7 +539,7 @@
       </md-list-item>
 
       <md-list-item md-expand>
-        <span class="md-list-item-text">Meats</span>
+        <span class="md-list-item-text">Cuisines</span>
         <md-list slot="md-expand" class="bc-trans hamburger-submenu">
           <md-list-item>
             <md-checkbox id="beefbox" v-model="OPT__BeefFree">
@@ -635,7 +635,7 @@
         </md-list>
       </md-list-item>
       <md-list-item md-expand>
-        <span class="md-list-item-text">Nuts</span>
+        <span class="md-list-item-text">Intolerances</span>
         <md-list slot="md-expand" class="bc-trans hamburger-submenu">
           <md-list-item>
             <md-checkbox id="peanutbox" v-model="OPT__PeanutFree">
@@ -684,6 +684,9 @@
           </md-list-item>
         </md-list>
       </md-list-item>
+
+
+	  
       <md-list-item>
         <button v-on:click="getSavedFilters()">test</button>
       </md-list-item>

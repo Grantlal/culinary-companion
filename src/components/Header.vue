@@ -1,9 +1,7 @@
 <template>
-<router-link
-to="/"
-id="linkless">
-  <span id="title">Culinary Companion</span>
-</router-link>
+  <router-link to="/" id="linkless">
+    <span id="title">Culinary Companion</span>
+  </router-link>
 </template>
 
 <script>
