@@ -108,7 +108,7 @@ export default {
     },
     getTechnique: async function(searchName) {
 		console.log("TechniqueGet");
-    var techniqueUrl = "https://culinarycompanionhome.azurewebsites.net/grocerLink?keyword=";
+    var techniqueUrl = "https://culinarycompaniontechniques20200427203903.azurewebsites.net/Techniques?search=";
     techniqueUrl += searchName;
     console.log(techniqueUrl);
 
