@@ -9,7 +9,7 @@
     </md-app-toolbar>
 
     <md-app-drawer v-on:toggleDrawer="toggleMenu" :md-active.sync="visible">
-      <filtersPrototype v-bind:param="this.parameters" v-on:paramEmitted="getParams" />
+      <filters v-on:cuisinesEmitted="getCuisines" v-on:dietsEmitted="getDiets" v-on:intolerancesEmitted="getIntolerances" />
     </md-app-drawer>
     <md-app-content id="cont">
       <div id="recipecards" v-for="recipe in recipeJSON" v-bind:key="recipe.id">
@@ -27,33 +27,44 @@
 </template>
 
 <script>
-import filtersPrototype from "./FiltersPrototype.vue";
+import filters from "./Filters.vue";
 import NavBar from "./NavBar.vue";
 import RecipeCard2 from "./RecipeCard2.vue";
 
 export default {
   components: {
     RecipeCard2,
-    filtersPrototype,
+    filters,
     NavBar,
   },
   methods: {
     toggleMenu(value) {
       this.visible = value;
     },
-    getParams(value) {
-      this.parameters = value;
-      console.log("params: " + value);
+    getCuisines(value) {
+      this.cuisines = value;
+      console.log("Cuisines: " + value);
+    },
+    getDiets(value) {
+      this.diets = value;
+      console.log("Diets: " + value);
+    },
+    getIntolerances(value) {
+      this.intolerances = value;
+      console.log("Intolerances: " + value);
     },
     getRecipe: async function(value) {
       console.log("getRecipe()");
-      var url = "https://culinarycompanionhome.azurewebsites.net/recipehome";
+	  var url = "https://culinarycompanionhome.azurewebsites.net/recipehome";
+	  console.log("Drawer cuisines: " + this.cuisines);
+	  console.log("Drawer diets: " + this.diets);
+	  console.log("Drawer intolerances: " + this.intolerances);
       var searchBod = {
         query: value,
-        cuisine: "",
+		cuisine: this.cuisines,
         excludeCuisine: "",
-        diet: "",
-        intolerances: "",
+        diet: this.diets,
+        intolerances: this.intolerances,
         equipment: "",
         includeIngredients: "",
         excludeIngredients: "",
@@ -133,7 +144,8 @@ export default {
         body: JSON.stringify(searchBody),
       });
 
-      let data = await response.text();
+	  let data = await response.text();
+	  console.log(data);
       response = JSON.parse(data);
 
       this.recipeJSON = [];
@@ -155,8 +167,9 @@ export default {
   },
   data: () => ({
     visible: false,
-    parameters: "",
-    query: "", 
+    intolerances: "",
+	cuisines: "", 
+	diets: "",
     recipeJSON: [],
   }), 
 };
