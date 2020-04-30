@@ -6,7 +6,12 @@
         <img :src="recipeImage()" />
       </md-card-media>
 
-      <h1>Ingredients</h1>
+      <h1>
+        Ingredients
+        <div>
+          <md-button class="md-raised" id="topBuyAll" v-on:click.native="AddGroceries()">Buy All Ingredients</md-button>
+        </div>
+      </h1>
       <md-card-content style="border-style: solid;">
         <md-card
           style="margin: 4px; display: inline-block; width: 24.4%;"
@@ -35,6 +40,11 @@
             <md-button id="singleGroceryButton" v-on:click.native="getSingleGrocery(ingredient.name)">Buy</md-button>
           </md-card-actions>
         </md-card>
+        <h1>
+          <div>
+            <md-button class="md-raised" id="topBuyAll" v-on:click.native="AddGroceries()">Buy All Ingredients</md-button>
+          </div>
+        </h1>
       </md-card-content>
 
       <h1>Instructions</h1>
@@ -117,11 +127,31 @@ export default {
 		method: "Get",
 		});
 
-		let groceryData = await groceryResponse.text();
+    let groceryData = await groceryResponse.text();
 		amazonUrl += groceryData + "&Quantity.1=1";
 		console.log(amazonUrl);
     window.open( amazonUrl, "_blank"); 		console.log(groceryData);
-		},
+    },
+    AddGroceries: async function() {
+      var grocerList = this.recipeIngredients();
+      var groceryUrl = "https://culinarycompanionhome.azurewebsites.net/grocerLink?keyword=";
+      var amazonUrl = "http://www.amazon.com/gp/aws/cart/add.html?";
+      var asinString = "ASIN."
+      console.log(grocerList[0].name);
+
+      for(var i = 0; i < grocerList.length; i++)
+      {
+        groceryUrl += grocerList[i].name;
+        let groceryResponse = await fetch(groceryUrl);
+        let groceryData = await groceryResponse.text();
+        amazonUrl += asinString + (i+1) + "=" + groceryData + "&Quantity." + (i+1) + "=1";
+        console.log(amazonUrl);
+        groceryUrl = "https://culinarycompanionhome.azurewebsites.net/grocerLink?keyword=";
+        if(i-1 < grocerList.length)
+          amazonUrl += "&";
+      }
+      window.open( amazonUrl, "_blank");
+    },
     recipeName() {
       var foo = this.findRecipe();
       return foo.title;
@@ -176,6 +206,11 @@ h4 {
   margin-left: auto;
   margin-right: auto;
   width: 500px;
+}
+#topBuyAll {
+  background-color: lightgray;
+  margin-top: 15px;
+  text-align: center;
 }
 h1 {
   text-align: center;
