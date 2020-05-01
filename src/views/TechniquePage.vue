@@ -55,12 +55,13 @@ export default {
       let techniqueData = await techniqueResponse.text();
 
       console.log(techniqueData);
-      this.techniqueParse(techniqueData);
-      return techniqueData;
+      
+      return this.techniqueParse(techniqueData);
     },
 
     techniqueParse(technique) {
       let response = JSON.parse(technique);
+      console.log(response);
 
       this.techniqueJSON = [];
       for (var index in response) {
