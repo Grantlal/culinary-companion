@@ -15,10 +15,11 @@
         >SEARCH</md-button
       >
     </div>
+    <ul v-if ="this.apiCall === true">
     <md-card 
     style="margin: 4px; display: inline-block; width: 24.4%;"
     v-for="technique in techniqueJSON"
-    :key ="technique._id"
+    :key ="technique.name"
     >
       <md-card-media md-big>
         <video-embed
@@ -29,8 +30,11 @@
         {{technique.name}}
       </md-card-header>
     </md-card>
+    </ul>
   </div>
+    
 </template>
+
 
 <script>
 import VueMaterial from "vue-material";
@@ -86,6 +90,7 @@ export default {
         console.log(this.techniqueJSON[j].url);
         console.log(this.techniqueJSON[j].tag);
       }
+      this.apiCall = true;
       return this.techniqueJSON;
     },
   },
@@ -103,6 +108,7 @@ export default {
       menuVisible: false,
       overlay_on: false,
       url: "",
+      apiCall: "",
     };
   },
 };
