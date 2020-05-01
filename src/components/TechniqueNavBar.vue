@@ -11,31 +11,13 @@
       md-align-trigger
     >
      <router-link :to="{ name: 'home', params: { id: 'search' } }">
-      <md-button md-menu-trigger>Recipes</md-button>
+      <md-button md-menu-trigger>Recipe</md-button>
       </router-link>
     </md-menu>
 
     <md-menu class="bc-trans" md-size="medium" md-align-trigger>
       <md-button md-menu-trigger>Favorites</md-button>
     </md-menu>
-
-    <div style="margin-left: auto; min-width: 300px; max-width:500px;">
-      <md-field style="min-width: 300px; max-width:500px;">
-        <label>Search Technique</label>
-        <md-input
-          v-on:keydown.enter="emitRecipe"
-          @focus="$event.target.select()"
-          v-model="searchString"
-        ></md-input>
-      </md-field>
-    </div>
-
-    <md-button
-      class="md-raised"
-      style="margin-right: 40px;"
-      v-on:click.native="emitRecipe"
-      >SEARCH</md-button
-    >
 
     <md-menu class="bc-trans" md-size="medium" md-align-trigger>
       <md-button class="md-icon-button" style="width: 100%;" md-menu-trigger>

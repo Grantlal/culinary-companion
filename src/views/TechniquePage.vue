@@ -1,6 +1,18 @@
 <template>
   <div>
-     <Drawer />
+    <Drawer />
+    <div style="margin-left: auto; min-width: 300px; max-width:500px;">
+      <md-field style="min-width: 300px; max-width:500px;">
+        <label>Search For A Technique</label>
+        <md-input v-model="searchString"></md-input>
+      </md-field>
+      <md-button
+        class="md-raised"
+        style="margin-right: 40px;"
+        v-on:click.native="getTechnique(searchString)"
+        >SEARCH</md-button
+      >
+    </div>
     <md-card style="margin: 4px; display: inline-block; width: 24.4%;">
       <md-card-media md-big>
         <video-embed
@@ -27,8 +39,43 @@ Vue.use(Embed);
 export default {
   name: "techniquePage",
   components: {
-    Drawer
+    Drawer,
   },
+
+  methods: {
+    getTechnique: async function(searchName) {
+      console.log("TechniqueGet");
+      console.log(searchName);
+      var techniqueUrl =
+        "https://culinarycompanionhome.azurewebsites.net/techniquehome?keyword=";
+      techniqueUrl += searchName;
+      console.log(techniqueUrl);
+
+      let techniqueResponse = await fetch(techniqueUrl);
+      let techniqueData = await techniqueResponse.text();
+
+      console.log(techniqueData);
+      techniqueParse(techniqueData);
+      return techniqueData;
+    },
+
+    techniqueParse(technique){
+      response = JSON.parse(technique);
+
+      this.techniqueJSON = [];
+      for (var index in response) {
+        for (let i = 0; i < index.length; i++) { //change the 3 here
+          this.recipeJSON.push(response[index][i]);
+          console.log(index.length);
+          console.log(response[0][1]);
+        }
+      }
+    },
+  },
+  data: () => ({
+    visible: false,
+    searchString: "",
+  }),
 
   data() {
     return {
@@ -38,9 +85,9 @@ export default {
       techniqueurl: [],
       menuVisible: false,
       overlay_on: false,
-      url: ""
+      url: "",
     };
-  }
+  },
 };
 </script>
 

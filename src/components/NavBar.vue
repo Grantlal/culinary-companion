@@ -10,7 +10,7 @@
       md-size="medium"
       md-align-trigger
     >
-      <md-button md-menu-trigger>Recipes</md-button>
+      <md-button md-menu-trigger>Recipe</md-button>
       <md-menu-content>
         <md-menu-item class="bc-white">Advanced Search</md-menu-item>
         <md-menu-item class="bc-white" v-on:click.native="data = 'asdf'"
