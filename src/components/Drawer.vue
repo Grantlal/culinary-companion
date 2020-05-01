@@ -9,7 +9,7 @@
     </md-app-toolbar>
 
     <md-app-drawer v-on:toggleDrawer="toggleMenu" :md-active.sync="visible">
-      <filters v-on:cuisinesEmitted="getCuisines" v-on:dietsEmitted="getDiets" v-on:intolerancesEmitted="getIntolerances" />
+      <filters v-bind:param="this.parameters" v-on:paramEmitted="getParams" />
     </md-app-drawer>
     <md-app-content id="cont">
       <div id="recipecards" v-for="recipe in recipeJSON" v-bind:key="recipe.id">
@@ -27,44 +27,33 @@
 </template>
 
 <script>
-import filters from "./Filters.vue";
+import Filters from "./Filters.vue";
 import NavBar from "./NavBar.vue";
 import RecipeCard2 from "./RecipeCard2.vue";
 
 export default {
   components: {
     RecipeCard2,
-    filters,
-    NavBar,
+    Filters,
+    NavBar
   },
   methods: {
     toggleMenu(value) {
       this.visible = value;
     },
-    getCuisines(value) {
-      this.cuisines = value;
-      console.log("Cuisines: " + value);
-    },
-    getDiets(value) {
-      this.diets = value;
-      console.log("Diets: " + value);
-    },
-    getIntolerances(value) {
-      this.intolerances = value;
-      console.log("Intolerances: " + value);
+    getParams(value) {
+      this.parameters = value;
+      console.log("params: " + value);
     },
     getRecipe: async function(value) {
       console.log("getRecipe()");
-	  var url = "https://culinarycompanionhome.azurewebsites.net/recipehome";
-	  console.log("Drawer cuisines: " + this.cuisines);
-	  console.log("Drawer diets: " + this.diets);
-	  console.log("Drawer intolerances: " + this.intolerances);
+      var url = "https://culinarycompanionhome.azurewebsites.net/recipehome";
       var searchBod = {
         query: value,
-		cuisine: this.cuisines,
+        cuisine: "",
         excludeCuisine: "",
-        diet: this.diets,
-        intolerances: this.intolerances,
+        diet: "",
+        intolerances: "",
         equipment: "",
         includeIngredients: "",
         excludeIngredients: "",
@@ -123,12 +112,12 @@ export default {
         minSugar: "",
         maxSugar: "",
         minZinc: "",
-        maxZinc: "",
+        maxZinc: ""
       };
 
-      const removeEmptyOrNull = (obj) => {
+      const removeEmptyOrNull = obj => {
         Object.keys(obj).forEach(
-          (k) =>
+          k =>
             (obj[k] &&
               typeof obj[k] === "object" &&
               removeEmptyOrNull(obj[k])) ||
@@ -141,37 +130,34 @@ export default {
 
       let response = await fetch(url, {
         method: "Post",
-        body: JSON.stringify(searchBody),
+        body: JSON.stringify(searchBody)
       });
 
-	  let data = await response.text();
-	  console.log(data);
+      let data = await response.text();
       response = JSON.parse(data);
 
       this.recipeJSON = [];
       for (var index in response) {
-        for (let i = 0; i < 3; i++) { //change the 3 here
+        for(let i = 0; i < 3; i++)
+        {
           this.recipeJSON.push(response[index][i]);
         }
       }
 
-      for (let i = 0; i < 3; i++) { //change the 3 here
-        this.recipeJSON.pop();
-      }
-
       console.log("Recipes:");
       console.log(this.recipeJSON);
+      console.log("Recipe title");
+      console.log(this.recipeJSON[0].title);
 
       this.$store.state.recipes = this.recipeJSON;
-    },
+    }
   },
   data: () => ({
     visible: false,
-    intolerances: "",
-	cuisines: "", 
-	diets: "",
-    recipeJSON: [],
-  }), 
+    parameters: "",
+    query: "",
+    recipeJSON: []
+  })
 };
 </script>
 

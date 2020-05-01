@@ -24,5 +24,5 @@ You can also run `cd springboot_vue/frontend;npm run build`
 ### Testing
 You'll have to have the front-end running and then run cypress with the following command
 ```
-npm run cypress:open
+./node_modules/.bin/cypress open
 ```

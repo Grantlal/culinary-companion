@@ -4,7 +4,7 @@
 
     <md-list class="bc-trans">
       <md-list-item md-expand>
-        <span class="md-list-item-text">Cuisines</span>
+        <span id= "firstHamburger" class="md-list-item-text">Cuisines</span>
         <md-list slot="md-expand" class="bc-trans hamburger-submenu">
           <md-list-item v-for="cuisine in Cuisines" :key="cuisine.text">
             <md-checkbox v-bind:id="cuisine.id" v-model="cuisine.active">
@@ -28,7 +28,7 @@
       </md-list-item>
 
       <md-list-item md-expand>
-        <span class="md-list-item-text">Diets</span>
+        <span id= "secondHamburger" class="md-list-item-text">Diets</span>
         <md-list slot="md-expand" class="bc-trans hamburger-submenu">
           <md-list-item v-for="diet in Diets" :key="diet.text">
             <md-checkbox v-bind:id="diet.id" v-model="diet.active">
@@ -52,7 +52,7 @@
       </md-list-item>
 
       <md-list-item md-expand>
-        <span class="md-list-item-text">Intolerances</span>
+        <span id= "thirdHamburger" class="md-list-item-text">Intolerances</span>
         <md-list slot="md-expand" class="bc-trans hamburger-submenu">
           <md-list-item v-for="intolerance in Intolerances" :key="intolerance.text">
             <md-checkbox v-bind:id="intolerance.id" v-model="intolerance.active">
