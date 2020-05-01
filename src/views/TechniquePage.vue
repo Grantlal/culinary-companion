@@ -62,18 +62,19 @@ export default {
     techniqueParse(technique) {
       let response = JSON.parse(technique);
       console.log("response");
-      console.log(response[0][0].Name);
-      console.log(response[0][0].Value);
+      console.log(response);
 
       this.techniqueJSON = [];
       for (var index in response) {
-        for (let i = 0; i < 4; i++) {
-          this.techniqueJSON.push(response[index][i]);
-          let name =response[index][i].Name;
-          let value = response[index][i].Value;
-          let foo = {};
-        }
+        this.techniqueJSON.push({
+          _id: response[index][0].Value,
+          name: response[index][1].Value,
+          tag: response[index][2].Value,
+          url: response[index][3].Value,
+        });
       }
+
+      console.log("this.techniqueJSON");
       console.log(this.techniqueJSON);
     },
   },
