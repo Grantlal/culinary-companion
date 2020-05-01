@@ -69,13 +69,16 @@ export default {
         this.techniqueJSON.push({
           _id: response[index][0].Value,
           name: response[index][1].Value,
-          tag: response[index][2].Value,
-          url: response[index][3].Value,
+          url: response[index][2].Value,
+          tag: response[index][3].Value,
         });
       }
 
       console.log("this.techniqueJSON");
       console.log(this.techniqueJSON);
+      for (let j = 0; j < this.techniqueJSON.length; j++) {
+        console.log(this.techniqueJSON[j].name);
+      }
     },
   },
   data: () => ({
