@@ -55,21 +55,32 @@ export default {
       let techniqueData = await techniqueResponse.text();
 
       console.log(techniqueData);
-      techniqueParse(techniqueData);
-      return techniqueData;
+      
+      return this.techniqueParse(techniqueData);
     },
 
-    techniqueParse(technique){
-      response = JSON.parse(technique);
+    techniqueParse(technique) {
+      let response = JSON.parse(technique);
+      console.log(response);
 
       this.techniqueJSON = [];
       for (var index in response) {
-        for (let i = 0; i < index.length; i++) { //change the 3 here
-          this.recipeJSON.push(response[index][i]);
-          console.log(index.length);
-          console.log(response[0][1]);
-        }
+        this.techniqueJSON.push({
+          [response[index][0].Name]: response[index][0].Value,
+          [response[index][1].Name]: response[index][1].Value,
+          [response[index][2].Name]: response[index][2].Value,
+          [response[index][3].Name]: response[index][3].Value,
+        });
       }
+
+      console.log("this.techniqueJSON");
+      for (let j = 0; j < this.techniqueJSON.length; j++) {
+        console.log(this.techniqueJSON[j]._id);
+        console.log(this.techniqueJSON[j].name);
+        console.log(this.techniqueJSON[j].url);
+        console.log(this.techniqueJSON[j].tag);
+      }
+      return this.techniqueJSON;
     },
   },
   data: () => ({
