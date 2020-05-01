@@ -1,7 +1,9 @@
 <template>
   <div>
+  <div>
     <Drawer />
-    <div style="margin-left: auto; min-width: 300px; max-width:500px;">
+  </div>  
+    <div style="margin-right: auto; min-width: 300px; max-width:500px;">
       <md-field style="min-width: 300px; max-width:500px;">
         <label>Search For A Technique</label>
         <md-input v-model="searchString"></md-input>
@@ -13,14 +15,18 @@
         >SEARCH</md-button
       >
     </div>
-    <md-card style="margin: 4px; display: inline-block; width: 24.4%;">
+    <md-card 
+    style="margin: 4px; display: inline-block; width: 24.4%;"
+    v-for="technique in techniqueJSON"
+    :key ="technique._id"
+    >
       <md-card-media md-big>
         <video-embed
-          src="https://www.youtube.com/embed/ZJy1ajvMU1k"
+          :src="technique.url"
         ></video-embed>
       </md-card-media>
       <md-card-header>
-        5 Basic Cooking Techniques
+        {{technique.name}}
       </md-card-header>
     </md-card>
   </div>
