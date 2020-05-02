@@ -1,6 +1,6 @@
 <template>
   <div class="card-expansion">
-    <router-link :to="{name: 'recipe', params:{id: this.id}}">
+    <router-link :to="{name: 'recipe', params:{id: this.id}}" id="ClickableRecipeCard">
     <md-card md-with-hover>
       <article class="card">
         <div class="thumb">

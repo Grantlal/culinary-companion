@@ -1,6 +1,6 @@
 <template>
   <div class="andrew-nav md-toolbar">
-    <md-button class="md-icon-button" v-on:click.native="emitToggle">
+    <md-button id="leftMenuButton" class="md-icon-button" v-on:click.native="emitToggle">
       <md-icon md-light>menu</md-icon>
     </md-button>
 
@@ -10,7 +10,7 @@
       md-size="medium"
       md-align-trigger
     >
-      <md-button md-menu-trigger>Recipe</md-button>
+      <md-button id="recipeTab" md-menu-trigger>Recipes</md-button>
       <md-menu-content>
         <md-menu-item class="bc-white">Advanced Search</md-menu-item>
         <md-menu-item class="bc-white" v-on:click.native="data = 'asdf'"
@@ -22,7 +22,7 @@
 
     <md-menu class="bc-trans" md-size="medium" md-align-trigger>
       <router-link :to="{ name: 'technique', params: { id: 'search' } }">
-        <md-button>Techniques</md-button>
+        <md-button id="techniqueTab">Techniques</md-button>
       </router-link>
     </md-menu>
 
@@ -31,6 +31,7 @@
       <md-field style="min-width: 300px; max-width:500px;">
         <label>Search Recipes</label>
         <md-input
+          id="searchInput"
           v-on:keydown.enter="emitRecipe"
           @focus="$event.target.select()"
           v-model="searchString"
@@ -39,6 +40,7 @@
     </div>
 
     <md-button
+      id="searchButton"
       class="md-raised"
       style="margin-right: 40px;"
       v-on:click.native="emitRecipe"
@@ -46,7 +48,7 @@
     >
 
     <md-menu class="bc-trans" md-size="medium" md-align-trigger>
-      <md-button class="md-icon-button" style="width: 100%;" md-menu-trigger>
+      <md-button id = "loginButton" class="md-icon-button" style="width: 100%;" md-menu-trigger>
         <md-icon>person</md-icon>
       </md-button>
       <md-menu-content v-if="!$auth.loading">
@@ -55,6 +57,7 @@
         </router-link>
         <!-- show login when not authenticated -->
         <md-menu-item
+          id = "login"
           class="bc-white"
           v-if="!$auth.isAuthenticated"
           @click="login"
