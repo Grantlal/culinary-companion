@@ -56,6 +56,8 @@ export default {
     getTechnique: async function(searchName) {
       console.log("TechniqueGet");
       console.log(searchName);
+      this.startCheckApiCall();
+      console.log(this.apiCall);
       var techniqueUrl =
         "https://culinarycompanionhome.azurewebsites.net/techniquehome?keyword=";
       techniqueUrl += searchName;
@@ -90,9 +92,18 @@ export default {
         console.log(this.techniqueJSON[j].url);
         console.log(this.techniqueJSON[j].tag);
       }
-      this.apiCall = true;
+      this.endCheckApiCall();
+      console.log(this.apiCall);
       return this.techniqueJSON;
     },
+
+    startCheckApiCall(){
+        this.apiCall = false;
+    },
+    endCheckApiCall(){
+          this.apiCall = true;
+    },
+        
   },
   data: () => ({
     visible: false,
