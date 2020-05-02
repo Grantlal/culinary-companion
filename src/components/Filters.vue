@@ -98,16 +98,16 @@
           </md-list-item>
         </md-list>
       </md-list-item>
-
+<!--
       <md-list-item>
         <button v-on:click="getSavedFilters()">Save Filters</button>
       </md-list-item>
+	  -->
     </md-list>
   </div>
 </template>
 
 <script>
-const https = require("https");
 export default {
   data: () => ({
     param: "",

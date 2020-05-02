@@ -5,7 +5,7 @@
     </md-button>
 
     <router-link :to="{ name: 'home', params: { id: 'search' } }">
-      <md-button md-menu-trigger>Recipe</md-button>
+      <md-button md-menu-trigger>Recipes</md-button>
     </router-link>
 
     <router-link :to="{ name: 'technique', params: { id: 'search' } }">

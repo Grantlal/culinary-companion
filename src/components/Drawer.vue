@@ -153,14 +153,12 @@ export default {
 
       this.recipeJSON = [];
       for (var index in response) {
-        for (let i = 0; i < 3; i++) {
-          //change the 3 here
+        for (let i = 0; i < 10; i++) {
           this.recipeJSON.push(response[index][i]);
         }
       }
 
-      for (let i = 0; i < 3; i++) {
-        //change the 3 here
+      for (let i = 0; i < 10; i++) {
         this.recipeJSON.pop();
       }
 

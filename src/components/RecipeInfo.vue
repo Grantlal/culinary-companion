@@ -170,7 +170,7 @@ export default {
     getAnalyzedInstructionsSteps() {
       var foo = this.findRecipe();
       console.log(foo.analyzedInstructions[0].steps);
-      console.log(foo.analyzedInstructions[0].steps[0].ingredients[0].id);
+      // console.log(foo.analyzedInstructions[0].steps[0].ingredients[0].id);
       return foo.analyzedInstructions[0].steps;
     },
     mathRandom(i) {
