@@ -1,42 +1,41 @@
 <template>
   <div>
-  <div>
-    <Drawer />
-  </div>  
-  
-    <div class= "center" style="margin-: auto; min-width: 300px; max-width:500px;">
+    <div>
+      <Drawer />
+    </div>
+
+    <div
+      class="center"
+      style="margin-: auto; min-width: 300px; max-width:500px;"
+    >
       <md-field style="min-width: 300px; max-width:500px;">
         <label>Search For A Technique</label>
-        <md-input v-model="searchString"></md-input>
+        <md-input id="technique-id" v-model="searchString"></md-input>
         <md-button
-        class="md-raised"
-        style="margin-left: 200px;"
-        v-on:click.native="getTechnique(searchString)"
-        >SEARCH</md-button
-      >
+          id="technique-button"
+          class="md-raised"
+          style="margin-left: 200px;"
+          v-on:click.native="getTechnique(searchString)"
+          >SEARCH</md-button
+        >
       </md-field>
-    
     </div>
-    <ul v-if ="this.apiCall === true">
-    <md-card 
-    style="margin: 4px; display: inline-block; width: 24.4%;"
-    v-for="technique in techniqueJSON"
-    :key ="technique.name"
-    >
-      <md-card-media md-big>
-        <video-embed
-          :src="technique.url"
-        ></video-embed>
-      </md-card-media>
-      <md-card-header>
-        {{technique.name}}
-      </md-card-header>
-    </md-card>
+    <ul v-if="this.apiCall === true">
+      <md-card
+        style="margin: 4px; display: inline-block; width: 24.4%;"
+        v-for="technique in techniqueJSON"
+        :key="technique.name"
+      >
+        <md-card-media md-big>
+          <video-embed id="youtube-video" :src="technique.url"></video-embed>
+        </md-card-media>
+        <md-card-header>
+          {{ technique.name }}
+        </md-card-header>
+      </md-card>
     </ul>
   </div>
-    
 </template>
-
 
 <script>
 import VueMaterial from "vue-material";
@@ -69,7 +68,7 @@ export default {
       let techniqueData = await techniqueResponse.text();
 
       console.log(techniqueData);
-      
+
       return this.techniqueParse(techniqueData);
     },
 
@@ -99,13 +98,12 @@ export default {
       return this.techniqueJSON;
     },
 
-    startCheckApiCall(){
-        this.apiCall = false;
+    startCheckApiCall() {
+      this.apiCall = false;
     },
-    endCheckApiCall(){
-          this.apiCall = true;
+    endCheckApiCall() {
+      this.apiCall = true;
     },
-        
   },
   data: () => ({
     visible: false,
@@ -155,7 +153,7 @@ h1 {
   text-align: center;
 }
 .flex {
-    display: flex;
+  display: flex;
 }
 .md-drawer {
   width: 230px;

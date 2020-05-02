@@ -8,6 +8,7 @@ describe('Successful Grocery Add', function() {
         cy.get('#searchInput').clear()
         cy.get('#searchInput').type("beef")
         cy.get('#searchButton').click()
+        cy.wait(1000)
         cy.get('#ClickableRecipeCard').click()
         cy.wait(1000)
         cy.get('#singleGroceryButton').click()

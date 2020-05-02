@@ -8,6 +8,7 @@ describe('Successful Recipes search', function() {
         cy.get('#searchInput').clear()
         cy.get('#searchInput').type("chicken")
         cy.get('#searchButton').click()
+        cy.wait(1000)
         cy.get('#ClickableRecipeCard').click()
         cy.wait(1000)
 

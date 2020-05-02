@@ -4,72 +4,96 @@
 
     <md-list class="bc-trans">
       <md-list-item md-expand>
-        <span id= "firstHamburger" class="md-list-item-text">Cuisines</span>
+        <span id="firstHamburger" class="md-list-item-text">Cuisines</span>
         <md-list slot="md-expand" class="bc-trans hamburger-submenu">
           <md-list-item v-for="cuisine in Cuisines" :key="cuisine.text">
             <md-checkbox v-bind:id="cuisine.id" v-model="cuisine.active">
               <label
                 class="clickable"
-                v-if="cuisine.active==false"
+                v-if="cuisine.active == false"
                 v-bind:for="cuisine.id"
-                @click="cuisine.active = !cuisine.active
-				getRecipeParams()"
-              >{{cuisine.text}}</label>
+                @click="
+                  cuisine.active = !cuisine.active;
+                  getRecipeParams();
+                "
+                >{{ cuisine.text }}</label
+              >
               <label
                 class="clickable"
-                v-if="cuisine.active==true"
+                v-if="cuisine.active == true"
                 v-bind:for="cuisine.id"
-                @click="cuisine.active = !cuisine.active
-				getRecipeParams()"
-              >{{cuisine.text}}</label>
+                @click="
+                  cuisine.active = !cuisine.active;
+                  getRecipeParams();
+                "
+                >{{ cuisine.text }}</label
+              >
             </md-checkbox>
           </md-list-item>
         </md-list>
       </md-list-item>
 
       <md-list-item md-expand>
-        <span id= "secondHamburger" class="md-list-item-text">Diets</span>
+        <span id="secondHamburger" class="md-list-item-text">Diets</span>
         <md-list slot="md-expand" class="bc-trans hamburger-submenu">
           <md-list-item v-for="diet in Diets" :key="diet.text">
             <md-checkbox v-bind:id="diet.id" v-model="diet.active">
               <label
                 class="clickable"
-                v-if="diet.active==false"
+                v-if="diet.active == false"
                 v-bind:for="diet.id"
-                @click="diet.active = !diet.active
-				getRecipeParams()"
-              >{{diet.text}}</label>
+                @click="
+                  diet.active = !diet.active;
+                  getRecipeParams();
+                "
+                >{{ diet.text }}</label
+              >
               <label
                 class="clickable"
-                v-if="diet.active==true"
+                v-if="diet.active == true"
                 v-bind:for="diet.id"
-                @click="diet.active = !diet.active
-				getRecipeParams()"
-              >{{diet.text}}</label>
+                @click="
+                  diet.active = !diet.active;
+                  getRecipeParams();
+                "
+                >{{ diet.text }}</label
+              >
             </md-checkbox>
           </md-list-item>
         </md-list>
       </md-list-item>
 
       <md-list-item md-expand>
-        <span id= "thirdHamburger" class="md-list-item-text">Intolerances</span>
+        <span id="thirdHamburger" class="md-list-item-text">Intolerances</span>
         <md-list slot="md-expand" class="bc-trans hamburger-submenu">
-          <md-list-item v-for="intolerance in Intolerances" :key="intolerance.text">
-            <md-checkbox v-bind:id="intolerance.id" v-model="intolerance.active">
+          <md-list-item
+            v-for="intolerance in Intolerances"
+            :key="intolerance.text"
+          >
+            <md-checkbox
+              v-bind:id="intolerance.id"
+              v-model="intolerance.active"
+            >
               <label
                 class="clickable"
-                v-if="intolerance.active==false"
+                v-if="intolerance.active == false"
                 v-bind:for="intolerance.id"
-                @click="intolerance.active = !intolerance.active
-				getRecipeParams()"
-              >{{intolerance.text}}</label>
+                @click="
+                  intolerance.active = !intolerance.active;
+                  getRecipeParams();
+                "
+                >{{ intolerance.text }}</label
+              >
               <label
                 class="clickable"
-                v-if="intolerance.active==true"
+                v-if="intolerance.active == true"
                 v-bind:for="intolerance.id"
-                @click="intolerance.active = !intolerance.active
-				getRecipeParams()"
-              >{{intolerance.text}}</label>
+                @click="
+                  intolerance.active = !intolerance.active;
+                  getRecipeParams();
+                "
+                >{{ intolerance.text }}</label
+              >
             </md-checkbox>
           </md-list-item>
         </md-list>
@@ -113,7 +137,7 @@ export default {
       { id: "23", text: "Southern", active: false },
       { id: "24", text: "Spanish", active: false },
       { id: "25", text: "Thai", active: false },
-      { id: "26", text: "Vietnamese", active: false }
+      { id: "26", text: "Vietnamese", active: false },
     ],
     Diets: [
       { id: "1", text: "Gluten Free", active: false },
@@ -124,7 +148,7 @@ export default {
       { id: "6", text: "Pescetarian", active: false },
       { id: "7", text: "Paleo", active: false },
       { id: "8", text: "Primal", active: false },
-      { id: "9", text: "Whole30", active: false }
+      { id: "9", text: "Whole30", active: false },
     ],
     Intolerances: [
       { id: "1", text: "Dairy", active: false },
@@ -138,8 +162,8 @@ export default {
       { id: "9", text: "Soy", active: false },
       { id: "10", text: "Sulfite", active: false },
       { id: "11", text: "Tree Nut", active: false },
-      { id: "12", text: "Wheat", active: false }
-    ]
+      { id: "12", text: "Wheat", active: false },
+    ],
   }),
   methods: {
     getRecipeParams: async function(event) {
@@ -148,17 +172,17 @@ export default {
       var iString = "";
 
       //for loop to collect all active filters
-      this.Cuisines.forEach(x => {
+      this.Cuisines.forEach((x) => {
         if (x.active === true) {
           cString += x.text.toString() + ",";
         }
       });
-      this.Diets.forEach(x => {
+      this.Diets.forEach((x) => {
         if (x.active === true) {
           dString += x.text.toString() + ",";
         }
       });
-      this.Intolerances.forEach(x => {
+      this.Intolerances.forEach((x) => {
         if (x.active === true) {
           iString += x.text.toString() + ",";
         }
@@ -181,11 +205,11 @@ export default {
     getSavedFilters: async function() {
       var url = "https://cc-myaccount.azurewebsites.net/api/accounts/" + 1;
       https
-        .get(url, resp => {
+        .get(url, (resp) => {
           let data = "";
 
           // A chunk of data has been recieved.
-          resp.on("data", chunk => {
+          resp.on("data", (chunk) => {
             data += chunk;
           });
 
@@ -201,13 +225,12 @@ export default {
             console.log(json);
           });
         })
-        .on("error", err => {
+        .on("error", (err) => {
           console.log("Error: " + err.message);
         });
-    }
-  }
+    },
+  },
 };
 </script>
 
-<style>
-</style>
+<style></style>
