@@ -1,48 +1,49 @@
 <template>
+<div class= "md-raised" style="background-color: #f5f5f5;">
   <div class="andrew-nav md-toolbar">
     <!-- <md-button class="md-icon-button" v-on:click.native="emitToggle">
       <md-icon md-light>menu</md-icon>
     </md-button> -->
-
-    <md-menu
-      class="bc-trans"
-      style="margin-left: 10px;"
-      md-size="medium"
-      md-align-trigger
-    >
-     <router-link :to="{ name: 'home', params: { id: 'search' } }">
-      <md-button md-menu-trigger>Recipe</md-button>
-      </router-link>
-    </md-menu>
-
-    <md-menu class="bc-trans" md-size="medium" md-align-trigger>
-      <md-button md-menu-trigger>Techniques</md-button>
-    </md-menu>
-
-    <md-menu class="login" md-size=" medium" md-align-trigger>
-      <md-button class="md-icon-button" style="width: 100%;" md-menu-trigger>
-        <md-icon>person</md-icon>
-      </md-button>
-      <md-menu-content v-if="!$auth.loading">
-        <router-link v-if="$auth.isAuthenticated" to="/account">
-          <md-menu-item class="bc-white">Account Settings</md-menu-item>
+      <md-menu
+        class="bc-trans"
+        style="margin-left: 10px;"
+        md-size="medium"
+        md-align-trigger
+      >
+        <router-link :to="{ name: 'home', params: { id: 'search' } }">
+          <md-button md-menu-trigger>Recipe</md-button>
         </router-link>
-        <!-- show login when not authenticated -->
-        <md-menu-item
-          class="bc-white"
-          v-if="!$auth.isAuthenticated"
-          @click="login"
-          >Log in</md-menu-item
-        >
-        <!-- show logout when authenticated -->
-        <md-menu-item
-          class="bc-white"
-          v-if="$auth.isAuthenticated"
-          @click="logout"
-          >Log out</md-menu-item
-        >
-      </md-menu-content>
-    </md-menu>
+      </md-menu>
+
+      <md-menu class="bc-trans" md-size="medium" md-align-trigger>
+        <md-button md-menu-trigger>Techniques</md-button>
+      </md-menu>
+
+      <md-menu class="login" md-size=" medium" md-align-trigger>
+        <md-button class="md-icon-button" style="width: 100%;" md-menu-trigger>
+          <md-icon>person</md-icon>
+        </md-button>
+        <md-menu-content v-if="!$auth.loading">
+          <router-link v-if="$auth.isAuthenticated" to="/account">
+            <md-menu-item class="bc-white">Account Settings</md-menu-item>
+          </router-link>
+          <!-- show login when not authenticated -->
+          <md-menu-item
+            class="bc-white"
+            v-if="!$auth.isAuthenticated"
+            @click="login"
+            >Log in</md-menu-item
+          >
+          <!-- show logout when authenticated -->
+          <md-menu-item
+            class="bc-white"
+            v-if="$auth.isAuthenticated"
+            @click="logout"
+            >Log out</md-menu-item
+          >
+        </md-menu-content>
+      </md-menu>
+    </div>
   </div>
 </template>
 
@@ -91,7 +92,13 @@ export default {
   font-size: 18px;
   line-height: 26px;
 }
-.login{
+.login {
   float: right;
+  position: absolute;
+  right: 1.5%;
+}
+
+.md-menu {
+  background-color: #f5f5f5;
 }
 </style>

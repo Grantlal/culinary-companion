@@ -4,7 +4,7 @@
     <Drawer />
   </div>  
   
-    <div class = "center" style="margin-: auto; min-width: 300px; max-width:500px;">
+    <div class= "center" style="margin-: auto; min-width: 300px; max-width:500px;">
       <md-field style="min-width: 300px; max-width:500px;">
         <label>Search For A Technique</label>
         <md-input v-model="searchString"></md-input>
@@ -165,5 +165,8 @@ h1 {
   color: black !important;
   font-size: 18px;
   line-height: 26px;
+}
+.md-drawer.md-theme-default {
+  background-color: #f5f5f5;
 }
 </style>
