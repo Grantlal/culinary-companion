@@ -3,17 +3,19 @@
   <div>
     <Drawer />
   </div>  
-    <div style="margin-right: auto; min-width: 300px; max-width:500px;">
+  
+    <div class = "center" style="margin-: auto; min-width: 300px; max-width:500px;">
       <md-field style="min-width: 300px; max-width:500px;">
         <label>Search For A Technique</label>
         <md-input v-model="searchString"></md-input>
-      </md-field>
-      <md-button
+        <md-button
         class="md-raised"
-        style="margin-right: 40px;"
+        style="margin-left: 200px;"
         v-on:click.native="getTechnique(searchString)"
         >SEARCH</md-button
       >
+      </md-field>
+    
     </div>
     <ul v-if ="this.apiCall === true">
     <md-card 
@@ -41,7 +43,7 @@ import VueMaterial from "vue-material";
 import "vue-material/dist/vue-material.min.css";
 import Vue from "vue";
 import Embed from "v-video-embed";
-import Drawer from "@/components/TechniqueDrawer.vue";
+import Drawer from "@/components/TechniqueNavBar.vue";
 
 // global register
 Vue.use(Embed);
@@ -125,7 +127,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 html,
 body {
   font-size: 100%;
@@ -151,5 +153,17 @@ h4 {
 }
 h1 {
   text-align: center;
+}
+.flex {
+    display: flex;
+}
+.md-drawer {
+  width: 230px;
+  max-width: calc(100vw - 125px);
+}
+.nav-title {
+  color: black !important;
+  font-size: 18px;
+  line-height: 26px;
 }
 </style>

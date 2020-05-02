@@ -26,16 +26,6 @@
       </router-link>
     </md-menu>
 
-    <md-menu class="bc-trans" md-size="medium" md-align-trigger>
-      <md-button md-menu-trigger>Favorites</md-button>
-      <md-menu-content>
-        <md-menu-item class="bc-white">Advanced Search</md-menu-item>
-        <md-menu-item class="bc-white" v-on:click.native="data = 'asdf'"
-          >Browse</md-menu-item
-        >
-        <md-menu-item class="bc-white">Surprise Me!</md-menu-item>
-      </md-menu-content>
-    </md-menu>
 
     <div style="margin-left: auto; min-width: 300px; max-width:500px;">
       <md-field style="min-width: 300px; max-width:500px;">

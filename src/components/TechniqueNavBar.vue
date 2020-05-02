@@ -1,8 +1,8 @@
 <template>
   <div class="andrew-nav md-toolbar">
-    <md-button class="md-icon-button" v-on:click.native="emitToggle">
+    <!-- <md-button class="md-icon-button" v-on:click.native="emitToggle">
       <md-icon md-light>menu</md-icon>
-    </md-button>
+    </md-button> -->
 
     <md-menu
       class="bc-trans"
@@ -16,10 +16,10 @@
     </md-menu>
 
     <md-menu class="bc-trans" md-size="medium" md-align-trigger>
-      <md-button md-menu-trigger>Favorites</md-button>
+      <md-button md-menu-trigger>Techniques</md-button>
     </md-menu>
 
-    <md-menu class="bc-trans" md-size="medium" md-align-trigger>
+    <md-menu class="login" md-size=" medium" md-align-trigger>
       <md-button class="md-icon-button" style="width: 100%;" md-menu-trigger>
         <md-icon>person</md-icon>
       </md-button>
@@ -90,5 +90,8 @@ export default {
   color: black !important;
   font-size: 18px;
   line-height: 26px;
+}
+.login{
+  float: right;
 }
 </style>
