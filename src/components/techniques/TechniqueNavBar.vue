@@ -14,10 +14,10 @@
 
     <div style="margin-left: auto; min-width: 300px; max-width:500px;">
       <md-field style="min-width: 300px; max-width:500px;">
-        <label>Search Recipes</label>
+        <label>Search Techniques</label>
         <md-input
           id="searchInput"
-          v-on:keydown.enter="emitRecipe"
+          v-on:keydown.enter="emitTechnique"
           @focus="$event.target.select()"
           v-model="searchString"
         ></md-input>
@@ -28,7 +28,7 @@
       id="searchButton"
       class="md-raised"
       style="margin-right: 40px;"
-      v-on:click.native="emitRecipe"
+      v-on:click.native="emitTechnique"
     >SEARCH</md-button>
 
     <md-menu class="bc-trans" md-size="medium" md-align-trigger>
@@ -66,9 +66,9 @@ export default {
       this.visible = !this.menuVisible;
       this.$emit("toggleDrawer", this.visible);
     },
-    emitRecipe() {
-      console.log("Search String: " + this.searchString);
-      this.$emit("recipeString", this.searchString);
+    emitTechnique() {
+      console.log("Technique Search String: " + this.searchString);
+      this.$emit("techniqueString", this.searchString);
     },
     // Log the user in
     login() {

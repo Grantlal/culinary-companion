@@ -12,26 +12,7 @@
       <md-button>Techniques</md-button>
     </router-link>
 
-    <div style="margin-left: auto; min-width: 300px; max-width:500px;">
-      <md-field style="min-width: 300px; max-width:500px;">
-        <label>Search Recipes</label>
-        <md-input
-          id="searchInput"
-          v-on:keydown.enter="emitRecipe"
-          @focus="$event.target.select()"
-          v-model="searchString"
-        ></md-input>
-      </md-field>
-    </div>
-
-    <md-button
-      id="searchButton"
-      class="md-raised"
-      style="margin-right: 40px;"
-      v-on:click.native="emitRecipe"
-    >SEARCH</md-button>
-
-    <md-menu class="bc-trans" md-size="medium" md-align-trigger>
+    <md-menu class="bc-trans" md-size="medium" style="position: absolute; right: 20px;" md-align-trigger>
       <md-button id="loginButton" class="md-icon-button" style="width: 100%;" md-menu-trigger>
         <md-icon>person</md-icon>
       </md-button>
@@ -66,10 +47,6 @@ export default {
       this.visible = !this.menuVisible;
       this.$emit("toggleDrawer", this.visible);
     },
-    emitRecipe() {
-      console.log("Search String: " + this.searchString);
-      this.$emit("recipeString", this.searchString);
-    },
     // Log the user in
     login() {
       this.$auth.loginWithRedirect();
@@ -83,7 +60,6 @@ export default {
   },
   data: () => ({
     visible: false,
-    searchString: ""
   })
 };
 </script>
