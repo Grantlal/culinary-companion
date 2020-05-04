@@ -1,12 +1,13 @@
 <template>
   <div style="height: 100%;">
-    <md-card :md-elevation="10" id="card">
+    <md-card class="md-elevation-10" id="card">
       <div class="user">
         <!--
       <img :src="$auth.user.picture" />
       <h2>{{ $auth.user.name }}</h2>
-      <p>{{ $auth.user.email }}</p>
-      <h1>{{ $auth.user.id }}</h1>
+        <md-divider></md-divider>
+      <p>email: {{ $auth.user.email }}</p>
+      <h1>user id: {{ $auth.user.id }}</h1>
         -->
 
         <img src="@/auth/an.png" />
@@ -18,39 +19,41 @@
         <md-divider></md-divider>
         <h2>Saved Filters</h2>
         <div>
-          <md-chip class="md-elevation-1" md-deletable>Filter 1</md-chip>
-          <md-chip class="md-elevation-1" md-deletable>Filter 2</md-chip>
-          <md-chip class="md-elevation-1" md-deletable>Filter 3</md-chip>
-          <md-chip class="md-elevation-1" md-deletable>Filter 4</md-chip>
+          <md-chips v-model="filters" md-static></md-chips>
         </div>
         <br />
         <br />
-        <md-button class="md-raised" v-on:click="getSavedFilters()">Load Filters</md-button>
+        <md-button class="md-raised" v-on:click="loadSavedFilters()">Load Filters</md-button>
+        <md-button class="md-raised" v-on:click="updateUserFilters()">Save Filters</md-button>
         <md-divider></md-divider>
       </div>
     </md-card>
-
-    <div>
-      <pre>{{ JSON.stringify($auth.user, null, 2) }}</pre>
-    </div>
   </div>
 </template>
 
 <script>
+import Vue from "vue";
 import VueMaterial from "vue-material";
 import "vue-material/dist/vue-material.min.css";
 const https = require("https");
-const axios = require("axios");
 
 export default {
+  mounted: function() {
+    this.getSavedFilters();
+  },
   data: () => ({
     filters: []
   }),
   methods: {
+    loadSavedFilters: function() {
+		// filters go to filters drawer
+	},
     getSavedFilters: async function() {
+		console.log(Vue.prototype)
       var url =
         //"https://cc-myaccount.azurewebsites.net/api/accounts/" + $auth.user.id;
-        "https://cc-myaccount.azurewebsites.net/api/accounts/" + "8";
+        "https://cc-myaccount.azurewebsites.net/api/accounts/" + Vue.prototype.$auth.user.sub;
+      let json = [];
       https
         .get(url, resp => {
           let data = "";
@@ -64,37 +67,63 @@ export default {
           resp.on("end", () => {
             //console.log(JSON.parse(data).explanation);
             var response = JSON.parse(data);
-            console.log(response);
 
-            var json = [];
             for (var index in response) {
               json.push(response[index]);
             }
-            console.log("json");
-            console.log(json);
 
+            console.log(json[1]);
+            this.filters = json[1];
             if (json[0] == "404") {
-              const data = JSON.stringify({
-                id: "8",
-                filters: "asdf,asdf,asdf"
-              });
-              axios
-                .post("https://cc-myaccount.azurewebsites.net/api/accounts/", {
-                  id: "8",
-                  filters: "asdf,asdf,asdf,asdf"
-                })
-                .then(function(response) {
-                  console.log(response);
-                });
+              this.createUser();
+              this.filters = [];
             }
+            console.log("Filters:");
+            console.log(this.filters);
           });
         })
         .on("error", err => {
           console.log("Error: " + err.message);
           console.log("user not in db??");
         });
-    }
-  }
+    },
+    createUser: async function() {
+      console.log("in createUser");
+      // var id = this.$auth.user.sub;
+      var url =
+        //"https://cc-myaccount.azurewebsites.net/api/accounts/" + $auth.user.id;
+        "https://cc-myaccount.azurewebsites.net/api/accounts" +
+        "?id=" +
+        Vue.prototype.$auth.user.sub +
+        "&filters=" + this.filtersString;
+
+      let response = await fetch(url, {
+        method: "Post"
+      });
+
+      let data = await response;
+      console.log(data);
+      //response2 = JSON.parse(data2);
+    },
+    updateUserFilters: async function() {
+		var json = [];
+		// database gets updated
+		var url =
+        //"https://cc-myaccount.azurewebsites.net/api/accounts/" + $auth.user.id;
+        "https://cc-myaccount.azurewebsites.net/api/accounts" +
+        "?id=" +
+        Vue.prototype.$auth.user.sub +
+        "&filters=" + this.filters;
+
+      let response = await fetch(url, {
+        method: "Put"
+      });
+
+      let data = await response;
+      console.log(data);
+      //response2 = JSON.parse(data2);
+	},
+  },
 };
 </script>
 

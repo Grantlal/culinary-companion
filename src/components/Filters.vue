@@ -197,7 +197,10 @@ export default {
       if (iString.substring(iString.length - 1, iString.length) == ",") {
         iString = iString.substring(0, iString.length - 1);
       }
-      console.clear();
+	  console.clear();
+	  this.$store.state.filters = [cString, dString, iString];
+	  console.log("store.state.filters:")
+	  console.log(this.$store.state.filters);
       this.$emit("cuisinesEmitted", cString);
       this.$emit("dietsEmitted", dString);
       this.$emit("intolerancesEmitted", iString);

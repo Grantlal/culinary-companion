@@ -46,22 +46,22 @@ export default {
     },
     getCuisines(value) {
       this.cuisines = value;
-      //console.log("Cuisines: " + value);
+      console.log("Cuisines: " + value);
     },
     getDiets(value) {
       this.diets = value;
-      //console.log("Diets: " + value);
+      console.log("Diets: " + value);
     },
     getIntolerances(value) {
       this.intolerances = value;
-      //console.log("Intolerances: " + value);
+      console.log("Intolerances: " + value);
     },
     getRecipe: async function(value) {
-      //console.log("getRecipe()");
+      console.log("getRecipe()");
       var url = "https://culinarycompanionhome.azurewebsites.net/recipehome";
-      //console.log("Drawer cuisines: " + this.cuisines);
-      //console.log("Drawer diets: " + this.diets);
-      //console.log("Drawer intolerances: " + this.intolerances);
+      console.log("Drawer cuisines: " + this.cuisines);
+      console.log("Drawer diets: " + this.diets);
+      console.log("Drawer intolerances: " + this.intolerances);
       var searchBod = {
         query: value,
         cuisine: this.cuisines,

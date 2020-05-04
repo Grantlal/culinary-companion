@@ -7,8 +7,8 @@ export default new Vuex.Store({
   state: {
 	recipes: 10, // The TV inventory
 	account: {
-		id: 0,
-		filters: [""]
+		id: "",
+		filters: []
 	}
   },
   getters: {
