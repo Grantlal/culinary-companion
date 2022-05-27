@@ -16,17 +16,5 @@ export default {
   components: {
     Drawer
   },
-
-  data() {
-    return {
-      query: null,
-      recipeExample: null,
-      recipes: [],
-      techniqueurl: [],
-      menuVisible: false,
-      overlay_on: false,
-      url: ""
-    };
-  }
 }
 </script>
